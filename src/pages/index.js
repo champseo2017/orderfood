@@ -8,7 +8,13 @@ class Home extends Component {
     this.state = {
       input: '',
       message: [],
-      endpoint: "https://orderfoodtestv1.herokuapp.com"//"http://localhost:8080" // เชื่อมต่อไปยัง url ของ realtime server
+      endpoint: "http://localhost:8080"
+      /* 
+      https://orderfoodtestv1.herokuapp.com
+      http://localhost:8080
+      เชื่อมต่อไปยัง url ของ realtime server
+      */
+     
     }
   }
 

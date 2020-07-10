@@ -1,13 +1,15 @@
 require("dotenv").config();
 const express = require("express");
 const next = require("next");
-const socketIO = require('socket.io');
+const cors = require("cors");
+const socketIO = require("socket.io");
 const frameguard = require("frameguard");
 const bodyParser = require("body-parser");
 const nocache = require("nocache");
+const routes = require("./routes");
 const port = process.env.PORT || 8080;
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev,poweredByHeader: false });
+const app = next({ dev, poweredByHeader: false });
 const handle = app.getRequestHandler();
 const nextExpress = require("next-express/server")(app).injectInto(express);
 
@@ -16,6 +18,7 @@ app.prepare().then(() => {
   server.use(nocache());
   server.use(frameguard({ action: "deny" }));
   server.disable("x-powered-by");
+  server.use(cors());
   // parse application/x-www-form-urlencoded
   server.use(bodyParser.urlencoded({ extended: true }));
   // parse application/json
@@ -27,26 +30,41 @@ app.prepare().then(() => {
     handle(req, res);
   });
 
-
   const app = server.listen(port, function (err, result) {
-    console.log('running in port http://localhost:' + port)
-})
+    console.log("running in port http://localhost:" + port);
+  });
 
-const io = socketIO.listen(app);
-// รอการ connect จาก client
-io.on('connection', client => {
-    console.log('user connected')
+  const io = socketIO.listen(app);
+  // รอการ connect จาก client
+  io.on("connection", async (client) => {
+    console.log("user connected");
+    // var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    //routes(server)
+const abc = () => {
+  console.log('fewfwefew');
   
+}
+  
+    server.get("/", (req, res) => {
+      
+      server.render(req, res, "/index");
+      abc()
+    
+  });
+   
+
+
+   
     // เมื่อ Client ตัดการเชื่อมต่อ
-    client.on('disconnect', () => {
-        console.log('user disconnected')
-    })
+    // client.on("disconnect", () => {
+    //   console.log("user disconnected");
+    // });
 
     // ส่งข้อมูลไปยัง Client ทุกตัวที่เขื่อมต่อแบบ Realtime
-    client.on('sent-message', function (message) {
-        io.sockets.emit('new-message', message)
-    })
-})
+    // client.on('sent-message', function (message) {
+    //     io.sockets.emit('new-message', message)
+    // })
+  });
 
   // http.listen(port, (err) => {
   //   if (err) throw err;
