@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import socketIOClient from 'socket.io-client'
+import nextExpressPage from "next-express/page";
 
 class Home extends Component {
   constructor() {
@@ -47,6 +48,7 @@ class Home extends Component {
 
   render() {
     const { input, message } = this.state
+  
     return (
       <div>
         <div style={style}>
@@ -67,4 +69,13 @@ class Home extends Component {
 
 const style = { marginTop: 20, paddingLeft: 50 }
 
-export default Home
+
+Home.getInitialProps = async (ctx) => {
+  const {statusCode} = ctx.query._nextExpressData
+  console.log(statusCode);
+  
+  
+   return {page:''}
+}
+
+export default nextExpressPage(Home)

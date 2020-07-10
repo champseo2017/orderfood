@@ -6,7 +6,8 @@ const socketIO = require("socket.io");
 const frameguard = require("frameguard");
 const bodyParser = require("body-parser");
 const nocache = require("nocache");
-const routes = require("./routes");
+const routePages = require("./pages/routes");
+const routeApi = require("./api/routes");
 const port = process.env.PORT || 8080;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev, poweredByHeader: false });
@@ -24,7 +25,8 @@ app.prepare().then(() => {
   // parse application/json
   server.use(bodyParser.json());
 
-  //const http = require("http").Server(server);
+  routePages(server);
+  routeApi(server)
 
   server.all("*", (req, res) => {
     handle(req, res);
@@ -33,41 +35,20 @@ app.prepare().then(() => {
   const app = server.listen(port, function (err, result) {
     console.log("running in port http://localhost:" + port);
   });
-
+ 
   const io = socketIO.listen(app);
   // รอการ connect จาก client
   io.on("connection", async (client) => {
-    console.log("user connected");
-    // var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    //routes(server)
-const abc = () => {
-  console.log('fewfwefew');
-  
-}
-  
-    server.get("/", (req, res) => {
-      
-      server.render(req, res, "/index");
-      abc()
-    
-  });
-   
+    console.log("user connected gggww");
 
-
-   
     // เมื่อ Client ตัดการเชื่อมต่อ
-    // client.on("disconnect", () => {
-    //   console.log("user disconnected");
-    // });
+    client.on("disconnect", () => {
+      console.log("user disconnected");
+    });
 
     // ส่งข้อมูลไปยัง Client ทุกตัวที่เขื่อมต่อแบบ Realtime
-    // client.on('sent-message', function (message) {
-    //     io.sockets.emit('new-message', message)
-    // })
+    client.on("sent-message", function (message) {
+      io.sockets.emit("new-message", message);
+    });
   });
-
-  // http.listen(port, (err) => {
-  //   if (err) throw err;
-  //   console.log(`> Ready on http://localhost:${port}`);
-  // });
 });
