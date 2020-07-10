@@ -1,0 +1,32 @@
+{
+  "name": "order",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node src/server/index.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node src/server/index.js",
+    "heroku-postbuild": "npm run build"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "csurf": "^1.11.0",
+    "dotenv": "^8.2.0",
+    "emotion": "^10.0.27",
+    "express": "^4.17.1",
+    "express-myconnection": "^1.0.4",
+    "frameguard": "^3.1.0",
+    "http": "0.0.1-security",
+    "mysql": "^2.15.0",
+    "next": "9.4.4",
+    "next-compose-plugins": "^2.2.0",
+    "next-express": "^1.0.1",
+    "nocache": "^2.1.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-translate": "^7.0.1",
+    "reactjs-localstorage": "^1.0.1",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
+  }
+}
