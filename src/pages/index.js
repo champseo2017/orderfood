@@ -9,7 +9,7 @@ class Home extends Component {
     this.state = {
       input: '',
       message: [],
-      endpoint: "http://localhost:8080"
+      endpoint: "https://orderfoodtestv1.herokuapp.com"
       /* 
       https://orderfoodtestv1.herokuapp.com
       http://localhost:8080
