@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import QRCode from 'qrcode.react';
 
 class Users extends Component {
   componentDidMount() {
     if (typeof window !== "undefined") {
+      
       const notificationButton = document.getElementById("enableNotifications");
       let swRegistration = null;
 
@@ -94,6 +96,7 @@ class Users extends Component {
   render() {
     return (
       <div className="container">
+        <QRCode value="http://www.google.com" size={200}/>
         <button id="enableNotifications">🔔 Enable Notification</button>
       </div>
     );

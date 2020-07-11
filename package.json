@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node src/server/index.js",
+    "dev": "cross-env BROWSER=chrome node src/server/index.js",
     "build": "next build",
-    "start": "NODE_ENV=production node src/server/index.js",
+    "start": "cross-env BROWSER=chrome NODE_ENV=production node src/server/index.js",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.4",
+    "cross-env": "^7.0.2",
     "csurf": "^1.11.0",
     "dotenv": "^8.2.0",
     "emotion": "^10.0.27",
@@ -24,11 +25,12 @@
     "next": "9.4.4",
     "next-compose-plugins": "^2.2.0",
     "next-express": "^1.0.1",
+    "next-pwa": "latest",
     "nocache": "^2.1.0",
+    "qrcode.react": "^1.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-translate": "^7.0.1",
-    "next-pwa": "latest",
     "reactjs-localstorage": "^1.0.1",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
