@@ -1,8 +1,8 @@
 const withPWA = require('next-pwa')
 const withPlugins = require("next-compose-plugins");
 
-const dev = process.env.NODE_ENV !== 'production'
-const production = process.env.NODE_ENV === 'production'
+// const dev = process.env.NODE_ENV !== 'production'
+// const production = process.env.NODE_ENV === 'development'
 const nextConfig = {
   poweredByHeader: false,
   generateBuildId: async () => {
@@ -24,7 +24,7 @@ const nextConfig = {
 
 module.exports = withPlugins([[withPWA,{
   pwa: {
-  disable: production,
+  // disable: production,
   dest: 'public',
   //register: true, // deploy true
   // skipWaiting: true, // deploy true
