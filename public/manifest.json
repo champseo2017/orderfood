@@ -1,0 +1,52 @@
+{
+  "gcm_sender_id": "",
+  "gcm_user_visible_only": true,
+  "permissions": [
+    "gcm"
+  ],
+    "name": "Sea zaa",
+    "short_name": "Sea zaa",
+    "description": "Sea zaa App Seafood",
+    "start_url": "/",
+    "scope":".",
+    "display": "standalone",
+    "background_color": "#fdfdfd",
+    "theme_color": "#8ce8fa",
+    "orientation": "portrait-primary",
+    "dir": "ltr",
+"lang": "th",
+    "icons": [
+      {
+        "src": "./image/pwa/72.png",
+        "type": "image/png", "sizes": "72x72"
+      },
+      {
+        "src": "./image/pwa/96.png",
+        "type": "image/png", "sizes": "96x96"
+      },
+      {
+        "src": "./image/pwa/128.png",
+        "type": "image/png","sizes": "128x128"
+      },
+      {
+        "src": "./image/pwa/144.png",
+        "type": "image/png", "sizes": "144x144"
+      },
+      {
+        "src": "./image/pwa/152.png",
+        "type": "image/png", "sizes": "152x152"
+      },
+      {
+        "src": "./image/pwa/192.png",
+        "type": "image/png", "sizes": "192x192"
+      },
+      {
+        "src": "./image/pwa/384.png",
+        "type": "image/png", "sizes": "384x384"
+      },
+      {
+        "src": "./image/pwa/512.png",
+        "type": "image/png", "sizes": "512x512"
+      }
+    ]
+  }

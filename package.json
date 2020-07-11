@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon src/server/index.js",
+    "dev": "node src/server/index.js",
     "build": "next build",
     "start": "NODE_ENV=production node src/server/index.js",
     "heroku-postbuild": "npm run build"
@@ -28,6 +28,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-translate": "^7.0.1",
+    "next-pwa": "latest",
     "reactjs-localstorage": "^1.0.1",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
