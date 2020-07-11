@@ -4,7 +4,7 @@ import QRCode from 'qrcode.react';
 class Users extends Component {
   componentDidMount() {
     if (typeof window !== "undefined") {
-      document.location = 'googlechrome://navigate?url=https://orderfoodtestv1.herokuapp.com/users';
+     
       const notificationButton = document.getElementById("enableNotifications");
       let swRegistration = null;
 
