@@ -17,7 +17,7 @@ class Users extends Component {
     navigator.serviceWorker
     .register('/sw.js')
     .then(swReg => {
-      console.log('Service Worker is registered', swReg);
+      //console.log('Service Worker is registered', swReg);
       // We are storing the service worker, globally
       swRegistration = swReg;
     })
