@@ -15,7 +15,8 @@ const nextConfig = {
       return config
     },
     env: {
-      BUILD_ID: process.env.BUILD_ID
+      BUILD_ID: process.env.BUILD_ID,
+      ENDPOINT: "http://localhost:3306" // https://orderfoodtestv1.herokuapp.com
     }
   }
 

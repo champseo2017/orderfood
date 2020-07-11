@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const next = require("next");
 const cors = require("cors");
+const mysql = require("mysql");
+const myConnection = require("express-myconnection");
 const socketIO = require("socket.io");
 const frameguard = require("frameguard");
 const bodyParser = require("body-parser");
@@ -12,6 +14,8 @@ const port = process.env.PORT || 8080;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev, poweredByHeader: false });
 const handle = app.getRequestHandler();
+const https = require('https')
+const httpsLocalhost = require("https-localhost")()
 const nextExpress = require("next-express/server")(app).injectInto(express);
 
 app.prepare().then(() => {
@@ -32,23 +36,41 @@ app.prepare().then(() => {
     handle(req, res);
   });
 
-  const app = server.listen(port, function (err, result) {
+  // const app = server.listen(port, function (err, result) {
+  //   console.log("running in port http://localhost:" + port);
+  // });
+ 
+  // test noti
+  server.listen(port, function (err, result) {
     console.log("running in port http://localhost:" + port);
   });
+
+  //PORT | https
+// const funcHttpsLocal = async() => {
+//   const certs = await httpsLocalhost.getCerts()
+//   return https.createServer(certs, server).listen(port, () => {
+//     console.log('done');
+//   })
+// }
+
+// funcHttpsLocal()
+
+
  
-  const io = socketIO.listen(app);
-  // รอการ connect จาก client
-  io.on("connection", async (client) => {
-    console.log("user connected gggww");
+  // const io = socketIO.listen(app);
+  // // รอการ connect จาก client
+  // io.on("connection", async (client) => {
+  //   console.log("user connected gggww");
 
-    // เมื่อ Client ตัดการเชื่อมต่อ
-    client.on("disconnect", () => {
-      console.log("user disconnected");
-    });
+  //   // เมื่อ Client ตัดการเชื่อมต่อ
+  //   client.on("disconnect", () => {
+  //     console.log("user disconnected");
+  //   });
 
-    // ส่งข้อมูลไปยัง Client ทุกตัวที่เขื่อมต่อแบบ Realtime
-    client.on("sent-message", function (message) {
-      io.sockets.emit("new-message", message);
-    });
-  });
+  //   // ส่งข้อมูลไปยัง Client ทุกตัวที่เขื่อมต่อแบบ Realtime
+  //   client.on("sent-message", function (message) {
+  //     io.sockets.emit("new-message", message);
+  //   });
+  // });
+
 });

@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head />
-        <body className="h-100">
+        <body>
           <Main />
           <NextScript />
         </body>
