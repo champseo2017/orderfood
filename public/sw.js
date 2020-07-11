@@ -81,7 +81,7 @@ if (!self.define) {
     });
   };
 }
-define("./sw.js",['./workbox-40728db4'], function (workbox) { 'use strict';
+define("./sw.js",['./workbox-b90066a8'], function (workbox) { 'use strict';
 
   /**
   * Welcome to your Workbox-powered service worker!
@@ -118,75 +118,11 @@ define("./sw.js",['./workbox-40728db4'], function (workbox) { 'use strict';
     "revision": "0620b7c58e0f6f6643d1dd663a87864c"
   }, {
     "url": "/_next/static/runtime/webpack.js",
-    "revision": "a72458e489e4c44009adc9a0a477034c"
+    "revision": "b48fde5b90870a81e13bce855841dd7a"
   }], {
     "ignoreURLParametersMatching": [/ts/]
   });
   workbox.cleanupOutdatedCaches();
-  workbox.registerRoute("/", new workbox.NetworkFirst({
-    "cacheName": "start-url",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 1,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute("/", new workbox.NetworkFirst({
-    "cacheName": "start-url",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 1,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i, new workbox.NetworkFirst({
-    "cacheName": "static-font-assets",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 4,
-      maxAgeSeconds: 604800,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i, new workbox.NetworkFirst({
-    "cacheName": "static-image-assets",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 64,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/.(?:js)$/i, new workbox.NetworkFirst({
-    "cacheName": "static-js-assets",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 16,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/.(?:css|less)$/i, new workbox.NetworkFirst({
-    "cacheName": "static-style-assets",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 16,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/.(?:json|xml|csv)$/i, new workbox.NetworkFirst({
-    "cacheName": "static-data-assets",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 16,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/.*/i, new workbox.NetworkFirst({
-    "cacheName": "others",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 16,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
 
 });
 //# sourceMappingURL=sw.js.map

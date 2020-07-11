@@ -41,19 +41,19 @@ app.prepare().then(() => {
   // });
  
   // test noti
-  // server.listen(port, function (err, result) {
-  //   console.log("running in port http://localhost:" + port);
-  // });
+  server.listen(port, function (err, result) {
+    console.log("running in port http://localhost:" + port);
+  });
 
   //PORT | https
-const funcHttpsLocal = async() => {
-  const certs = await httpsLocalhost.getCerts()
-  return https.createServer(certs, server).listen(port, () => {
-    console.log('done');
-  })
-}
+// const funcHttpsLocal = async() => {
+//   const certs = await httpsLocalhost.getCerts()
+//   return https.createServer(certs, server).listen(port, () => {
+//     console.log('done');
+//   })
+// }
 
-funcHttpsLocal()
+// funcHttpsLocal()
 
 
  
