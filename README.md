@@ -31,3 +31,7 @@ CREATE TABLE Tbl_users_details (
    FOREIGN KEY (Users_detail_id) REFERENCES tbl_users(Users_userid),
     INDEX (Users_detail_id,Users_userid,Users_detail_shopname,Users_detail_last_update)
 );
+
+## Db structure
+tbl_product_store->tbl_users->tbl_category->tbl_order_item->tbl_order->tbl-Options_food
+tbl_order_table->tbl_product_store->tbl_category
