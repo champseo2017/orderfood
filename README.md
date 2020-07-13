@@ -1,30 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Create db
+## Tbl_users
+CREATE TABLE Tbl_users (
+    Users_userid int unsigned NOT NULL AUTO_INCREMENT,
+    Users_email varchar(50) NOT NULL,
+    Users_phonenumber varchar(50) NOT NULL,
+    Users_password varchar(100) NOT NULL,
+    Users_confirmpassword varchar(100) NOT NULL,
+    Users_image varchar(100) NOT NULL DEFAULT '',
+    Users_role enum('admin', 'shopstore') NOT NULL DEFAULT 'shopstore',
+    Users_actives enum('active') NOT NULL DEFAULT 'inactive',
+    Users_createat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (Users_iserid),
+    INDEX (Users_userid,Users_email,Users_createat,Users_role)
+);
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Tbl_users Detail
+CREATE TABLE Tbl_users_details (
+    Users_detail_id int unsigned NOT NULL AUTO_INCREMENT,
+    Users_userid int NOT NULL,
+    Users_detail_password varchar(100),
+    Users_detail_confirmpassword varchar(100),
+    Users_detail_tokenqrcode varchar(100),
+    Users_detail_image varchar(100) DEFAULT '',
+    Users_detail_shopname varchar(100) DEFAULT '',
+    Users_detail_locality varchar(100) DEFAULT '',
+    Users_detail_district varchar(100) DEFAULT '',
+    Users_detail_province varchar(100) DEFAULT '',
+    Users_detail_last_update datetime DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (Users_detail_id),
+   FOREIGN KEY (Users_detail_id) REFERENCES tbl_users(Users_userid),
+    INDEX (Users_detail_id,Users_userid,Users_detail_shopname,Users_detail_last_update)
+);
