@@ -90,16 +90,37 @@ exports.storeCreate = asyncHandler(async (req, res, next) => {
       }
     });
   };
+  
+  let resultEmail
+  try {
+      resultEmail = await emailFunc(Users_email).then((res) => {
+      return res;
+    });
+  } catch (error) {
+    res.status(200).json({ message: 'Error' });
+    res.end();
+  }
 
-  const resultEmail = await emailFunc(Users_email).then((res) => {
-    return res;
-  });
-  const resultPhone = await phoneFunc(Users_phonenumber).then((res) => {
-    return res;
-  });
-  const resultPassword = await passwordFunc(Users_password).then((res) => {
-    return res;
-  });
+  let resultPhone
+  try {
+    resultPhone = await phoneFunc(Users_phonenumber).then((res) => {
+      return res;
+    });
+  } catch (error) {
+    res.status(200).json({ message: 'Error' });
+    res.end();
+  }
+ 
+  let resultPassword
+  try {
+     resultPassword = await passwordFunc(Users_password).then((res) => {
+      return res;
+    });
+  } catch (error) {
+    res.status(200).json({ message: 'Error' });
+    res.end();
+  }
+ 
 
   console.log(resultEmail);
   console.log(resultPhone);
