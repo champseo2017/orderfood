@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const next = require("next");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const csrf = require("csurf");
 const mysql = require("mysql");
 const myConnection = require("express-myconnection");
 const socketIO = require("socket.io");
@@ -10,7 +12,7 @@ const bodyParser = require("body-parser");
 const nocache = require("nocache");
 const routePages = require("./pages/routes");
 const routeApi = require("./api/routes");
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev, poweredByHeader: false });
 const handle = app.getRequestHandler();
@@ -20,10 +22,21 @@ const nextExpress = require("next-express/server")(app).injectInto(express);
 
 app.prepare().then(() => {
   const server = nextExpress();
+  const dbOptions = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.PORT,
+    database: process.env.DATABASE,
+  };
+
+  server.use(myConnection(mysql, dbOptions, "pool"));
   server.use(nocache());
+  const csrfProtection = csrf({ cookie: true });
   server.use(frameguard({ action: "deny" }));
   server.disable("x-powered-by");
   server.use(cors());
+  server.use(cookieParser());
   // parse application/x-www-form-urlencoded
   server.use(bodyParser.urlencoded({ extended: true }));
   // parse application/json
@@ -41,8 +54,8 @@ app.prepare().then(() => {
   // });
  
   // test noti
-  server.listen(port, function (err, result) {
-    console.log("running in port http://localhost:" + port);
+  server.listen(8000, function (err, result) {
+    console.log("running in port http://localhost:" + '8000');
   });
 
   //PORT | https

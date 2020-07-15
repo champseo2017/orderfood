@@ -5,12 +5,11 @@ CREATE TABLE Tbl_users (
     Users_email varchar(50) NOT NULL,
     Users_phonenumber varchar(50) NOT NULL,
     Users_password varchar(100) NOT NULL,
-    Users_confirmpassword varchar(100) NOT NULL,
     Users_image varchar(100) NOT NULL DEFAULT '',
     Users_role enum('admin', 'shopstore') NOT NULL DEFAULT 'shopstore',
-    Users_actives enum('active') NOT NULL DEFAULT 'inactive',
+    Users_actives enum('active', 'inactive') NOT NULL DEFAULT 'inactive',
     Users_createat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (Users_iserid),
+    PRIMARY KEY (Users_userid),
     INDEX (Users_userid,Users_email,Users_createat,Users_role)
 );
 
