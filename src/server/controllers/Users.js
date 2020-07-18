@@ -5,9 +5,11 @@ const validator = require("email-validator");
 const isNumber = require("is-number");
 const passwordValidator = require("password-validator");
 const isNullOrEmpty = require("check-is-empty-js");
+const passwordHash = require('password-hash');
+const moment = require('moment-timezone');
 
 exports.storeCreate = asyncHandler(async (req, res, next) => {
-  const { Users_email, Users_phonenumber, Users_password } = req.body;
+  const { Users_email, Users_phonenumber, Users_password, Users_image } = req.body;
 
   const emailFunc = (email) => {
     return new Promise((resolve, reject) => {
@@ -85,7 +87,27 @@ exports.storeCreate = asyncHandler(async (req, res, next) => {
           res.status(200).json({ message: checkPass });
           res.end();
         } else {
-          resolve(removeSpace);
+          const hashedPassword = passwordHash.generate(removeSpace);
+          resolve(hashedPassword);
+        }
+      }
+    });
+  };
+
+  const imageFunc = (image) => {
+    const strTags = striptags(image);
+    return new Promise((resolve, reject) => {
+      if (isNullOrEmpty(strTags)) {
+        res.status(200).json({ message: "Images is require." });
+        res.end();
+      } else if (strTags) {
+        const isImage = require('is-image');
+        const checkImage = isImage(strTags);
+        if(checkImage){
+          resolve(strTags)
+        }else{
+          res.status(200).json({ message: "The image format is invalid." });
+          res.end();
         }
       }
     });
@@ -120,11 +142,30 @@ exports.storeCreate = asyncHandler(async (req, res, next) => {
     res.status(200).json({ message: 'Error' });
     res.end();
   }
+
+  let resultImage
+  try {
+     resultImage = await imageFunc(Users_image).then((res) => {
+      return res;
+    });
+  } catch (error) {
+    res.status(200).json({ message: 'Error' });
+    res.end();
+  }
+
+  const usersRole = "shopstore"
+  const usersActives = "inactive"
+  const usersCreateat = moment().tz("Asia/Bangkok").format();
  
 
   console.log(resultEmail);
   console.log(resultPhone);
   console.log(resultPassword);
+  //passwordHash.verify('Bo@1234567785555', resultPassword)
+  console.log(resultImage);
+  console.log(usersRole);
+  console.log(usersActives);
+  console.log(usersCreateat);
 
   // req.getConnection(
   //   asyncHandler(async (err, connection) => {
