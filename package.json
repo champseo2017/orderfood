@@ -9,6 +9,7 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.0",
     "check-is-empty-js": "^1.0.3",
@@ -41,17 +42,17 @@
     "qrcode.react": "^1.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-redux": "^7.1.1",
     "react-translate": "^7.0.1",
     "reactjs-localstorage": "^1.0.1",
+    "redux": "^3.7.2",
+    "redux-persist": "6.0.0",
+    "redux-promise-middleware": "^6.1.1",
+    "redux-thunk": "^2.3.0",
     "remove-whitespace": "^1.1.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "striptags": "^3.1.1",
-    "redux": "^3.7.2",
-    "redux-promise-middleware": "^6.1.1",
-    "redux-thunk": "^2.3.0",
-    "react-redux": "^7.1.1",
-    "redux-persist": "6.0.0"
+    "striptags": "^3.1.1"
   },
   "devDependencies": {
     "nodemon": "^1.14.3"

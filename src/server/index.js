@@ -43,8 +43,8 @@ app.prepare().then(() => {
   server.use(bodyParser.json());
 
   routePages(server);
-  routeApi(server)
-
+  routeApi(server);
+ 
   server.all("*", (req, res) => {
     handle(req, res);
   });
@@ -54,7 +54,7 @@ app.prepare().then(() => {
   // });
  
   // test noti
-  server.listen(8000, function (err, result) {
+  server.listen(port, function (err, result) {
     console.log("running in port http://localhost:" + '8000');
   });
 

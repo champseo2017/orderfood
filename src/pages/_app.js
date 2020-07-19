@@ -9,10 +9,21 @@ import configureStore from "../store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 
-
-const { store,persistor } = configureStore();
+const { store, persistor } = configureStore();
 
 export default class MyApp extends App {
+  static async getInitialProps({ Component, ctx }) {
+    let pageProps = {};
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    return { pageProps };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.log(error);
+  }
   render() {
     const { Component, pageProps } = this.props;
     return (

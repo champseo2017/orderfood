@@ -20,7 +20,7 @@ const initialState = {
         });
       case "CLEARDATA_USERS":
         return Object.assign({}, state, {
-          users: { data: null, isLoading: false, isRejected: false },
+          users: { data: 'clear data 2', isLoading: false, isRejected: false },
         });
       default:
         break;

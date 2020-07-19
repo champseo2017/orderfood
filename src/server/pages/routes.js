@@ -20,4 +20,15 @@ module.exports = function (app) {
       };
     },
   });
+
+  app.pageRoute({
+    path: "/shopstore/create",
+    renderPath: "/shopstore/create",
+    async getProps(req, res, next) {
+      return {
+        statusCode: res.statusCode,
+      };
+    },
+  });
+
 };

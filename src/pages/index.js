@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Link from "next/link";
 import nextExpressPage from "next-express/page";
 import { connect } from 'react-redux';
-import { clearCreateUser } from '../redux/action/testUserActions';
+import { clearCreateUser,clearCreateUser2 } from '../redux/action/testUserActions';
 
 class Home extends Component {
+  
   componentDidMount(){
     this.props.dispatch(clearCreateUser());
   }
