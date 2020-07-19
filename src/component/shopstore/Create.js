@@ -1,14 +1,14 @@
-import React, { Component, Suspense } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
+
 
 // const useImage = dynamic(
 //   () => import('react-image'),
 //   { ssr: false }
 // )
 
-class Create extends Component {
-  render() {
-    const { IMaskInput } = require("react-imask");
+const Create = React.memo(() => {
+  const { IMaskInput } = require("react-imask");
     return (
       <React.Fragment>
         <form>
@@ -50,7 +50,6 @@ class Create extends Component {
         </form>
       </React.Fragment>
     );
-  }
-}
+})
 
 export default Create;
