@@ -42,6 +42,7 @@
     "qrcode.react": "^1.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-imask": "^6.0.5",
     "react-redux": "^7.1.1",
     "react-translate": "^7.0.1",
     "reactjs-localstorage": "^1.0.1",
