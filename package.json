@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.0",
     "check-is-empty-js": "^1.0.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.4",
@@ -20,6 +21,7 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-myconnection": "^1.0.4",
+    "font-awesome": "4.7.0",
     "frameguard": "^3.1.0",
     "http": "0.0.1-security",
     "https": "^1.0.0",
@@ -44,7 +46,12 @@
     "remove-whitespace": "^1.1.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "striptags": "^3.1.1"
+    "striptags": "^3.1.1",
+    "redux": "^3.7.2",
+    "redux-promise-middleware": "^6.1.1",
+    "redux-thunk": "^2.3.0",
+    "react-redux": "^7.1.1",
+    "redux-persist": "6.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.14.3"
