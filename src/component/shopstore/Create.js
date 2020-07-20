@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 // )
 
 const Create = React.memo(() => {
-  const { IMaskInput } = require("react-imask");
+  const IMaskInput = require("react-imask");
     return (
       <React.Fragment>
         <form>

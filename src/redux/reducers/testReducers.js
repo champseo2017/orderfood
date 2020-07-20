@@ -11,7 +11,7 @@ const initialState = {
   
       case "CREATE_USERS_SUCCESS":
         return Object.assign({}, state, {
-          users: { data: "action.payload", isLoading: false, isRejected: false },
+          users: { data: "action.payload456", isLoading: false, isRejected: false },
         });
   
       case "CREATE_USERS_REJECTED":

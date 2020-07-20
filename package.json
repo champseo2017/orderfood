@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon src/server/index.js",
+    "dev": "nodemon server/index.js",
     "build": "next build",
-    "start": "NODE_ENV=production node src/server/index.js",
+    "start": "NODE_ENV=production node server/index.js",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {

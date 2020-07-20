@@ -49,9 +49,7 @@ export default class MyApp extends App {
           <meta name="theme-color" content="#8ce8fa" />
         </Head>
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Component {...pageProps} />
-          </PersistGate>
+          {persistor && <Component {...pageProps} />}
         </Provider>
       </React.Fragment>
     );
