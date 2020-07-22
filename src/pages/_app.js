@@ -8,6 +8,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import configureStore from "../store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
+// Import FilePond styles
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
 
 const { store, persistor } = configureStore();
 

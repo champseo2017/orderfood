@@ -1,6 +1,7 @@
 import css from "styled-jsx/css";
 
 export default css.global`
+#image-profile-store div {cursor: pointer;}
   #image-profile-store div {
     display: block;
   }
@@ -16,4 +17,10 @@ export default css.global`
   #image-profile-store div:target {
     background-color: #ff8f2b;
   }
+
+  .filepond--image-preview-overlay-idle {
+    mix-blend-mode: multiply;
+    color: rgb(255 255 255 / 85%) !important;
+}
+  
 `;
