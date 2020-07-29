@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import createUserStyles from './StyleCreate'
+import CreateUserStyles from './StyleCreate'
 import NoSSR from "react-no-ssr";
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -219,7 +219,7 @@ class Create extends Component {
       </form>
 
       <style jsx global>
-        {createUserStyles}
+        {CreateUserStyles}
       </style>
       </React.Fragment>
     )
