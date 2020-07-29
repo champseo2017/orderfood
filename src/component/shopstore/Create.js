@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import createUserStyles from './styleCreate'
+import createUserStyles from './StyleCreate'
 import NoSSR from "react-no-ssr";
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";

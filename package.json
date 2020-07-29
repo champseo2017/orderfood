@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon src/server/index.js",
+    "dev": "node src/server/index.js",
     "build": "next build",
     "start": "NODE_ENV=production node src/server/index.js",
     "heroku-postbuild": "npm run build"
@@ -39,10 +39,10 @@
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "mysql": "^2.15.0",
-    "next": "9.4.4",
+    "next": "latest",
     "next-compose-plugins": "^2.2.0",
     "next-express": "^1.0.1",
-    "next-pwa": "latest",
+    "next-pwa": "3.0.3",
     "nocache": "^2.1.0",
     "password-hash": "^1.2.2",
     "password-validator": "^5.0.3",

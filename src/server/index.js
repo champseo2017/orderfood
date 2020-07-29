@@ -44,8 +44,8 @@ app.prepare().then(() => {
 
   routeApi(server);
   routePages(server);
+
   
- 
   server.all("*", (req, res) => {
     handle(req, res);
   });
@@ -55,14 +55,14 @@ app.prepare().then(() => {
   // });
  
   // test noti
-  server.listen(8080, function (err, result) {
+  server.listen(PORT, function (err, result) {
     console.log("running in port http://localhost:" + '8000');
   });
 
   //PORT | https
 // const funcHttpsLocal = async() => {
 //   const certs = await httpsLocalhost.getCerts()
-//   return https.createServer(certs, server).listen(port, () => {
+//   return https.createServer(certs, server).listen(8080, () => {
 //     console.log('done');
 //   })
 // }

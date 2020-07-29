@@ -1,6 +1,6 @@
 import css from "styled-jsx/css";
 
-export default css.global`
+const CreateUserStyles = css.global`
 #image-profile-store div {cursor: pointer;}
   #image-profile-store div {
     display: block;
@@ -24,3 +24,5 @@ export default css.global`
 }
   
 `;
+
+export default CreateUserStyles
