@@ -33,7 +33,7 @@ module.exports = withPlugins([[withPWA,{
       urlPattern: '/',
       handler: 'CacheFirst',
       options: {
-      cacheName: 'indespages',
+      cacheName: 'indexpages',
       expiration: {
       maxEntries: 4,
       maxAgeSeconds: 7 * 24 * 60 * 60 // 7 days
