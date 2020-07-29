@@ -27,7 +27,7 @@ module.exports = withPlugins([[withPWA,{
   disable: false, //dev,
   dest: 'public',
   //register: true, // deploy true
-  skipWaiting: true, // deploy true
+  //skipWaiting: true, // deploy true
   runtimeCaching: [
     {
       urlPattern: '/',
