@@ -8,6 +8,7 @@
     "short_name": "Sea zaa",
     "description": "Sea zaa App Seafood",
     "start_url": "/",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#fdfdfd",
     "theme_color": "#8ce8fa",
