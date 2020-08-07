@@ -30,7 +30,7 @@ const nextConfig = {
 
 module.exports = withPlugins([[withPWA,{
   pwa: {
-  disable: false, //dev,
+  disable: dev,
   dest: 'public',
   //register: true, // deploy true
   //skipWaiting: true, // deploy true
@@ -39,7 +39,7 @@ module.exports = withPlugins([[withPWA,{
       urlPattern: '/',
       handler: 'CacheFirst',
       options: {
-      cacheName: 'indexpages',
+      cacheName: 'start-url',
       expiration: {
       maxEntries: 4,
       maxAgeSeconds: 7 * 24 * 60 * 60 // 7 days

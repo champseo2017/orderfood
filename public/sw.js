@@ -81,7 +81,7 @@ if (!self.define) {
     });
   };
 }
-define("./sw.js",['./workbox-ffa6edef'], function (workbox) { 'use strict';
+define("./sw.js",['./workbox-b2de085c'], function (workbox) { 'use strict';
 
   /**
   * Welcome to your Workbox-powered service worker!
@@ -98,16 +98,8 @@ define("./sw.js",['./workbox-ffa6edef'], function (workbox) { 'use strict';
   importScripts();
   workbox.skipWaiting();
   workbox.clientsClaim();
-  workbox.registerRoute("/", new workbox.NetworkFirst({
-    "cacheName": "start-url",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 1,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
   workbox.registerRoute("/", new workbox.CacheFirst({
-    "cacheName": "indespages",
+    "cacheName": "start-url",
     plugins: [new workbox.ExpirationPlugin({
       maxEntries: 4,
       maxAgeSeconds: 604800,
@@ -148,14 +140,6 @@ define("./sw.js",['./workbox-ffa6edef'], function (workbox) { 'use strict';
   }), 'GET');
   workbox.registerRoute(/.(?:json|xml|csv)$/i, new workbox.NetworkFirst({
     "cacheName": "static-data-assets",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 16,
-      maxAgeSeconds: 86400,
-      purgeOnQuotaError: true
-    })]
-  }), 'GET');
-  workbox.registerRoute(/.*/i, new workbox.CacheFirst({
-    "cacheName": "others",
     plugins: [new workbox.ExpirationPlugin({
       maxEntries: 16,
       maxAgeSeconds: 86400,
