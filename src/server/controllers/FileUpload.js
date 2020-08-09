@@ -15,7 +15,7 @@ exports.fileUploads = asyncHandler(async (req, res, next) => {
             url: result.secure_url,
             name: req.body.name,
             description: req.body.description,
-            upload_preset:'ml_default',
+            upload_preset:'mychamp',
           },
         }).then((response) => {
           res.status(200).json(response.data.data);
