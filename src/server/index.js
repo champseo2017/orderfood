@@ -46,7 +46,6 @@ app.prepare().then(() => {
 
   cloudinary.config({
     cloud_name: 'boomgt123',
-    upload_preset:'mychamp',
     api_key: '254426875858998',
     api_secret:'aNeiFeumIvc6kERZC-gZCBxOJrk'
   });
