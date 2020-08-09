@@ -7,7 +7,7 @@ class UploadMyFile extends Component {
     data.append("file", event.target.files[0]);
     data.append("name", "some value user types");
     data.append("description", "some value user types");
-    data.append("upload_preset", "some value user types");
+    data.append("upload_preset", "testbbb");
     data.append('cloud_name', 'boomgt');
     
     // '/files' is your node.js route that triggers our middleware
