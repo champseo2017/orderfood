@@ -48,6 +48,7 @@ app.prepare().then(() => {
     cloud_name: 'boomgt',
     api_key: '816842862175834',
     api_secret:'q9aubhRXhb3Vk6XtvCRD0jYWt78',
+    upload_preset:'ml_default'
   });
 
   routeApi(server);
