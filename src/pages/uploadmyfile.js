@@ -7,6 +7,8 @@ class UploadMyFile extends Component {
     data.append("file", event.target.files[0]);
     data.append("name", "some value user types");
     data.append("description", "some value user types");
+    data.append("upload_preset", "some value user types");
+    data.append('cloud_name', 'boomgt');
     
     // '/files' is your node.js route that triggers our middleware
     axios.post(`${process.env.ENDPOINT}/api/files`, data).then((response) => {
