@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const next = require("next");
-const cloudinary = require('cloudinary');
+
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
@@ -17,10 +17,9 @@ const port = process.env.PORT || 8000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev, poweredByHeader: false });
 const handle = app.getRequestHandler();
-const https = require('https')
-const httpsLocalhost = require("https-localhost")()
+const https = require("https");
+const httpsLocalhost = require("https-localhost")();
 const nextExpress = require("next-express/server")(app).injectInto(express);
-
 
 app.prepare().then(() => {
   const server = nextExpress();
@@ -44,16 +43,9 @@ app.prepare().then(() => {
   // parse application/json
   server.use(bodyParser.json());
 
-  cloudinary.config({
-    cloud_name: 'boomgt123',
-    api_key: '254426875858998',
-    api_secret:'aNeiFeumIvc6kERZC-gZCBxOJrk'
-  });
-
   routeApi(server);
   routePages(server);
 
-  
   server.all("*", (req, res) => {
     handle(req, res);
   });
@@ -61,24 +53,22 @@ app.prepare().then(() => {
   // const app = server.listen(port, function (err, result) {
   //   console.log("running in port http://localhost:" + port);
   // });
- 
+
   // test noti port
   server.listen(port, function (err, result) {
-    console.log("running in port http://localhost:" + '8000');
+    console.log("running in port http://localhost:" + "8000");
   });
 
   //PORT | https
-// const funcHttpsLocal = async() => {
-//   const certs = await httpsLocalhost.getCerts()
-//   return https.createServer(certs, server).listen(8000, () => {
-//     console.log('done');
-//   })
-// }
+  // const funcHttpsLocal = async() => {
+  //   const certs = await httpsLocalhost.getCerts()
+  //   return https.createServer(certs, server).listen(8000, () => {
+  //     console.log('done');
+  //   })
+  // }
 
-// funcHttpsLocal()
+  // funcHttpsLocal()
 
-
- 
   // const io = socketIO.listen(app);
   // // รอการ connect จาก client
   // io.on("connection", async (client) => {
@@ -94,5 +84,4 @@ app.prepare().then(() => {
   //     io.sockets.emit("new-message", message);
   //   });
   // });
-
 });

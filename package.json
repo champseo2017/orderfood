@@ -4,7 +4,7 @@
   "homepage": ".",
   "private": true,
   "scripts": {
-    "dev": "node src/server/index.js",
+    "dev": "nodemon src/server/index.js",
     "build": "next build",
     "start": "NODE_ENV=production node src/server/index.js",
     "heroku-postbuild": "npm run build"
@@ -15,6 +15,7 @@
     "bootstrap": "^4.5.0",
     "check-is-empty-js": "^1.0.3",
     "cloudinary": "^1.22.0",
+    "cloudinary-react": "^1.6.6",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.4",
     "csurf": "^1.11.0",
