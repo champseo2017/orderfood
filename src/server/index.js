@@ -46,10 +46,8 @@ app.prepare().then(() => {
 
   cloudinary.config({
     cloud_name: 'boomgt',
-    api_key: '816842862175834',
-    api_secret:'q9aubhRXhb3Vk6XtvCRD0jYWt78',
-    upload_preset:'ml_default',
-    cloud_name:'boomgt'
+    api_key: '254426875858998',
+    api_secret:'aNeiFeumIvc6kERZC-gZCBxOJrk'
   });
 
   routeApi(server);
