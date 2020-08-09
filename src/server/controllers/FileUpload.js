@@ -10,9 +10,11 @@ exports.fileUploads = asyncHandler(async (req, res, next) => {
           url: `https://api.cloudinary.com/v1_1/boomgt/image/upload`, //API endpoint that needs file URL from CDN
           method: 'post',
           data: {
+            upload_preset:'ml_default',
             cloud_name:'boomgt123',
             url: result.secure_url,
             name: req.body.name,
+            file: req.body.file,
             description: req.body.description,
           },
         }).then((response) => {
