@@ -11,7 +11,6 @@ exports.fileUploads = asyncHandler(async (req, res, next) => {
           method: 'post',
           data: {
             cloud_name: 'boomgt123',
-            upload_preset:'ahs0a69d',
             url: result.secure_url,
             name: req.body.name,
             description: req.body.description
