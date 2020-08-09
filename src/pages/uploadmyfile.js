@@ -4,8 +4,7 @@ import axios from "axios";
 class UploadMyFile extends Component {
   handleUploadFile = (event) => {
     const data = new FormData();
-    data.append("upload_preset", "ml_default");
-    data.append('cloud_name', 'boomgt');
+    
     data.append("file", event.target.files[0]);
     data.append("name", "some value user types");
     data.append("description", "some value user types");
