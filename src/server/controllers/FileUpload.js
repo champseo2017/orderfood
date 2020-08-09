@@ -13,7 +13,7 @@ exports.fileUploads = asyncHandler(async (req, res, next) => {
             url: result.secure_url,
             name: req.body.name,
             description: req.body.description,
-            upload_preset:'jh2ypddo',
+            upload_preset:'ml_default',
             cloud_name:'boomgt'
           },
         }).then((response) => {
