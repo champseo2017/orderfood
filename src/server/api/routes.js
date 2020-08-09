@@ -8,5 +8,5 @@ module.exports = function (app) {
   const storage = multer.memoryStorage();
   const upload = multer({ storage });
   app.post('/api/users/store', users.storeCreate)
-  app.post('/api/files',upload.single('file'),fileUploadMiddleware.fileUploads)
+  app.post('/api/filesupload',upload.single('file'),fileUploadMiddleware.fileUploads)
 };

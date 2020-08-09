@@ -10,7 +10,7 @@ class UploadMyFile extends Component {
     data.append("description", "some value user types");
    
     // '/files' is your node.js route that triggers our middleware
-    axios.post(`${process.env.ENDPOINT}/api/files`, data).then((response) => {
+    axios.post(`${process.env.ENDPOINT}/api/filesupload`, data).then((response) => {
       console.log(response); // do something with the response
     });
   };
