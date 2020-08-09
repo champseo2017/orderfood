@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const next = require("next");
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const csrf = require("csurf");

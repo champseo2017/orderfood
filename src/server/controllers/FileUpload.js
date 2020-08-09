@@ -1,7 +1,7 @@
 require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 const axios = require('axios');
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 
 exports.fileUploads = asyncHandler(async (req, res, next) => {
     
