@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const next = require("next");
+const cloudinary = require('cloudinary').v2;
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
@@ -19,6 +20,7 @@ const handle = app.getRequestHandler();
 const https = require('https')
 const httpsLocalhost = require("https-localhost")()
 const nextExpress = require("next-express/server")(app).injectInto(express);
+
 
 app.prepare().then(() => {
   const server = nextExpress();
@@ -42,6 +44,12 @@ app.prepare().then(() => {
   // parse application/json
   server.use(bodyParser.json());
 
+  cloudinary.config({
+    cloud_name: 'boomgt',
+    api_key: '816842862175834',
+    api_secret:'q9aubhRXhb3Vk6XtvCRD0jYWt78',
+  });
+
   routeApi(server);
   routePages(server);
 
@@ -62,7 +70,7 @@ app.prepare().then(() => {
   //PORT | https
 // const funcHttpsLocal = async() => {
 //   const certs = await httpsLocalhost.getCerts()
-//   return https.createServer(certs, server).listen(8080, () => {
+//   return https.createServer(certs, server).listen(8000, () => {
 //     console.log('done');
 //   })
 // }
