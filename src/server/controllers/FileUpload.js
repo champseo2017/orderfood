@@ -5,7 +5,7 @@ const cloudinary = require('cloudinary').v2;
 
 exports.fileUploads = asyncHandler(async (req, res, next) => {
     
-    cloudinary.uploader.upload((result) => {
+    cloudinary.uploader.upload_stream((result) => {
         axios({
           url: `https://api.cloudinary.com/v1_1/boomgt/image/upload`, //API endpoint that needs file URL from CDN
           method: 'post',
