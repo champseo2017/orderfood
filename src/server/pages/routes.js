@@ -22,11 +22,11 @@ module.exports = function (app) {
   });
 
   app.pageRoute({
-    path: "/shopstore/create",
-    renderPath: "/shopstore/create",
+    path: "/admin",
+    renderPath: "/admin",
     async getProps(req, res, next) {
       return {
-        statusCode: res.statusCode,
+        pageCheck: 'admin',
       };
     },
   });

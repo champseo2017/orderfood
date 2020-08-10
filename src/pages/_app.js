@@ -1,17 +1,10 @@
 import App from "next/app";
 import Head from "next/head";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import reducers from "../redux/reducers";
-import thunk from "redux-thunk";
-import { PersistGate } from "redux-persist/integration/react";
 import configureStore from "../store";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "font-awesome/css/font-awesome.min.css";
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-
 
 const { store, persistor } = configureStore();
 
@@ -30,12 +23,73 @@ export default class MyApp extends App {
   }
   render() {
     const { Component, pageProps } = this.props;
+    const { pageCheck } = pageProps;
+
+    let page = "user";
+    if (pageCheck === "admin") {
+      page = pageCheck;
+    }
+
+    const renderPagesStyle = (page) => {
+      if (page === "admin") {
+        return (
+          <React.Fragment>
+            <link
+              href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet"
+            />
+            {/* Custom fonts for this template vendor/fontawesome-free/css/all.min.css */}
+            <link
+              href="/templateadmin/vendor/fontawesome-free/css/all.min.css"
+              rel="stylesheet"
+              type="text/css"
+            />
+            {/* Custom styles for this template */}
+            <link
+              href="/templateadmin/css/sb-admin-2.min.css"
+              rel="stylesheet"
+            />
+
+            {/* Bootstrap core JavaScript vendor/jquery/jquery.min.js */}
+            <script src="/templateadmin/vendor/jquery/jquery.min.js" />
+            {/* Bootstrap core JavaScript vendor/bootstrap/js/bootstrap.bundle.min.js */}
+            <script src="/templateadmin/vendor/bootstrap/js/bootstrap.bundle.js" />
+
+            {/* Core plugin JavaScript vendor/jquery-easing/jquery.easing.min.js*/}
+            <script src="/templateadmin/vendor/jquery-easing/jquery.easing.min.js" />
+
+            {/*Custom scripts for all pages js/sb-admin-2.min.js */}
+            <script src="/templateadmin/js/sb-admin-2.js" />
+
+            {/*Page level plugins vendor/chart.js/Chart.min.js*/}
+            <script src="/templateadmin/vendor/chart.js/Chart.min.js" />
+          </React.Fragment>
+        );
+      } else {
+        return (
+          <React.Fragment>
+            <link
+              href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet"
+            />
+            <link
+              rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+              integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+              crossOrigin="anonymous"
+            />
+          </React.Fragment>
+        );
+      }
+    };
+
     return (
       <React.Fragment>
         <Head>
           <meta
             name="viewport"
-            content="width=device-width,minimum-scale=1.0,initial-scale=1.0, user-scalable=no"
+            content="width=device-width,minimum-scale=1.0,initial-scale=1.0, user-scalable=no,shrink-to-fit=no"
+            charSet="utf-8"
           />
 
           {/* pwa */}
@@ -51,6 +105,7 @@ export default class MyApp extends App {
           <link rel="apple-touch-icon" href="/image/pwa/512.png" />
           <meta name="apple-mobile-web-app-status-bar" content="#8ce8fa" />
           <meta name="theme-color" content="#8ce8fa" />
+          {renderPagesStyle(page)}
         </Head>
         <Provider store={store}>
           {persistor && <Component {...pageProps} />}
