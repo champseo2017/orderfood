@@ -49,20 +49,6 @@ export default class MyApp extends App {
               href="/templateadmin/css/sb-admin-2.min.css"
               rel="stylesheet"
             />
-
-            {/* Bootstrap core JavaScript vendor/jquery/jquery.min.js */}
-            <script src="/templateadmin/vendor/jquery/jquery.min.js" />
-            {/* Bootstrap core JavaScript vendor/bootstrap/js/bootstrap.bundle.min.js */}
-            <script src="/templateadmin/vendor/bootstrap/js/bootstrap.bundle.js" />
-
-            {/* Core plugin JavaScript vendor/jquery-easing/jquery.easing.min.js*/}
-            <script src="/templateadmin/vendor/jquery-easing/jquery.easing.min.js" />
-
-            {/*Custom scripts for all pages js/sb-admin-2.min.js */}
-            <script src="/templateadmin/js/sb-admin-2.js" />
-
-            {/*Page level plugins vendor/chart.js/Chart.min.js*/}
-            <script src="/templateadmin/vendor/chart.js/Chart.min.js" />
           </React.Fragment>
         );
       } else {

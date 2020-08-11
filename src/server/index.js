@@ -55,7 +55,7 @@ app.prepare().then(() => {
   // });
 
   // test noti port
-  server.listen(port, function (err, result) {
+  server.listen(8000, function (err, result) {
     console.log("running in port http://localhost:" + "8000");
   });
 

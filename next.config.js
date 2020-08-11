@@ -37,6 +37,8 @@ module.exports = withPlugins(
         pwa: {
           disable: dev,
           dest: "public",
+          clientsClaim: true,
+          skipWaiting: true,
           runtimeCaching: [
             {
               urlPattern: "/",

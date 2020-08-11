@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Header = React.memo((props) => {
+const ContentCom = (props) => {
     return (
         <div>
             
         </div>
     )
-})
+}
 
-export default Header
+export default ContentCom
