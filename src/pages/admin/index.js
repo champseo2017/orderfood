@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import nextExpressPage from "next-express/page";
 import dynamic from "next/dynamic";
+import { LoadingPages } from "../../component/admin/include/middleware/LoadingPages";
 
 const Wrapper = dynamic(
   () => import("../../component/admin/include/template/Wrapper/Wrapper"),
@@ -55,61 +56,43 @@ const LogoutModal = dynamic(
   { ssr: false }
 );
 
-const Loading = dynamic(
-  () => import("../../component/admin/include/loading/Loading"),
-  { ssr: false }
-);
 
 class Index extends Component {
   _isMounted = false;
+  static async getInitialProps(ctx) {
+     
+    return { stars: '' }
+  }
   constructor(props) {
     super(props);
-    this.state = { loading: true };
   }
   componentDidMount() {
     this._isMounted = true;
-    if (this._isMounted) {
-      setTimeout(() => {
-        const loadStyle = {
-          loading: false,
-        };
-        this.setState({
-          ...loadStyle,
-        });
-      }, 900);
-    }
   }
   componentWillUnmount() {
     this._isMounted = false;
   }
   render() {
-    const { loading } = this.state;
     return (
       <React.Fragment>
-        {loading ? (
-          <Loading loading={loading} color="black" />
-        ) : (
-          <React.Fragment>
-            <Wrapper>
-              <Sidebar>
-                <SideBarMain />
-              </Sidebar>
-              <Content>
-                <TopBar>
-                  <SidebarToggle />
-                  <TopbarSearch />
-                  <TopbarNavbar />
-                </TopBar>
-                <ContainerContent />
-              </Content>
-            </Wrapper>
-            <ScrolltoTopButton />
-            <LogoutModal />
-          </React.Fragment>
-        )}
+        <Wrapper>
+          <Sidebar>
+            <SideBarMain />
+          </Sidebar>
+          <Content>
+            <TopBar>
+              <SidebarToggle />
+              <TopbarSearch />
+              <TopbarNavbar />
+            </TopBar>
+            <ContainerContent />
+          </Content>
+        </Wrapper>
+        <ScrolltoTopButton />
+        <LogoutModal />
       </React.Fragment>
     );
   }
 }
 
-export default nextExpressPage(Index);
+export default LoadingPages(nextExpressPage(Index));

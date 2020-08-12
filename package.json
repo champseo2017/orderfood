@@ -4,7 +4,7 @@
   "homepage": ".",
   "private": true,
   "scripts": {
-    "dev": "nodemon src/server/index.js",
+    "dev": "node src/server/index.js",
     "build": "next build",
     "start": "NODE_ENV=production node src/server/index.js",
     "heroku-postbuild": "npm run build"
@@ -36,6 +36,7 @@
     "https-localhost": "^4.6.0",
     "is-image": "^3.0.0",
     "is-number": "^7.0.0",
+    "jwt-simple": "^0.5.1",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "multer": "^1.4.2",
@@ -45,6 +46,9 @@
     "next-express": "^1.0.1",
     "next-pwa": "latest",
     "nocache": "^2.1.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
     "password-hash": "^1.2.2",
     "password-validator": "^5.0.3",
     "preact": "^10.4.7",

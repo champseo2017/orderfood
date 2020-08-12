@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { CheckIsEmpty } from "../component/library/FuncCheckEmpty";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -7,18 +8,23 @@ class MyDocument extends Document {
   }
   render() {
     const { __NEXT_DATA__ } = this.props;
-    const { pageProps } = __NEXT_DATA__.props;
-    const { pageCheck } = pageProps;
-
     let page = "user";
-    if (pageCheck === "admin") {
-      page = pageCheck;
+    let classPage;
+    if (CheckIsEmpty(__NEXT_DATA__) && CheckIsEmpty(__NEXT_DATA__.query)) {
+      const { _nextExpressData } = __NEXT_DATA__.query;
+      const { pageCheck, classPages } = _nextExpressData;
+      if (pageCheck === "admin") {
+        page = pageCheck;
+      }
+      if(classPages){
+        classPage = classPages
+      }
     }
 
     return (
       <Html>
         <Head />
-        <body id="page-top">
+        <body id="page-top" className={classPage ? classPage:'default'}>
           <Main />
           <NextScript />
           {page === "admin" && (

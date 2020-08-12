@@ -1,3 +1,4 @@
+require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 const striptags = require("striptags");
 const removeWhitespace = require("remove-whitespace");
@@ -7,6 +8,7 @@ const passwordValidator = require("password-validator");
 const isNullOrEmpty = require("check-is-empty-js");
 const passwordHash = require('password-hash');
 const moment = require('moment-timezone');
+const jwt = require("jwt-simple");
 
 exports.storeCreate = asyncHandler(async (req, res, next) => {
   const { Users_email, Users_phonenumber, Users_password, Users_image } = req.body;
@@ -178,3 +180,19 @@ exports.storeCreate = asyncHandler(async (req, res, next) => {
   //   })
   // );
 });
+
+const tokenForUser = (user) => {
+  const timestamp = new Date().getTime();
+  return jwt.encode(
+    {
+      sub: user.user_id,
+      username: user.user_name,
+      iat: timestamp
+    },
+    process.env.SECRET
+  );
+}
+
+exports.signin = (req, res, next) => {
+  res.send({ token: tokenForUser(req.user) });
+};

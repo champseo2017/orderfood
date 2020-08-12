@@ -5,6 +5,7 @@ import configureStore from "../store";
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import { CheckIsEmpty } from "../component/library/FuncCheckEmpty";
 
 const { store, persistor } = configureStore();
 
@@ -23,11 +24,17 @@ export default class MyApp extends App {
   }
   render() {
     const { Component, pageProps } = this.props;
-    const { pageCheck } = pageProps;
 
     let page = "user";
-    if (pageCheck === "admin") {
-      page = pageCheck;
+
+    if (
+      CheckIsEmpty(this.props.router) &&
+      CheckIsEmpty(this.props.router.query)
+    ) {
+      const { pageCheck } = this.props.router.query._nextExpressData;
+      if (pageCheck === "admin") {
+        page = pageCheck;
+      }
     }
 
     const renderPagesStyle = (page) => {

@@ -2,26 +2,31 @@ import React from "react";
 import Divider from "../unity/divider/Divider";
 import SidebarHeading from "../unity/sidebarheading/SidebarHeading";
 import SidebarToggler from "../unity/sidebartoggler/SidebarToggler";
-import Link from "next/link";
 
 const SideBarMain = React.memo(() => {
+  const linkToHomePage = (e) => {
+    e.preventDefault();
+    if (typeof window !== "undefined") {
+      window.location.href = "/";
+    }
+  };
   return (
     <React.Fragment>
       {/* Sidebar - Brand */}
-      <Link href="/">
-        <a
-          className="sidebar-brand d-flex align-items-center justify-content-center"
-          href="index.html"
-        >
-          <div className="sidebar-brand-icon rotate-n-15">
-            <i className="fas fa-laugh-wink"></i>
-          </div>
 
-          <div className="sidebar-brand-text mx-3">
-            SB Admin <sup>2</sup>
-          </div>
-        </a>
-      </Link>
+      <a
+        className="sidebar-brand d-flex align-items-center justify-content-center"
+        onClick={linkToHomePage}
+      >
+        <div className="sidebar-brand-icon rotate-n-15">
+          <i className="fas fa-laugh-wink"></i>
+        </div>
+
+        <div className="sidebar-brand-text mx-3">
+          SB Admin <sup>2</sup>
+        </div>
+      </a>
+
       <Divider classDivider="sidebar-divider my-0" />
       {/* Nav Item - Dashboard */}
       <li className="nav-item active">
