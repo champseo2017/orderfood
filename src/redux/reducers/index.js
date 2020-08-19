@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import testReducers from './testReducers'
+import authReducers from './authReducers'
+import checkAdminReducers from './checkAdminReducers'
 
-const rootReducer = combineReducers({testReducers});
+const rootReducer = combineReducers({
+    authReducers,
+    checkAdminReducers
+});
 
 export default rootReducer;

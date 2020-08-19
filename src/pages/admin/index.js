@@ -55,44 +55,73 @@ const LogoutModal = dynamic(
   () => import("../../component/admin/include/logoutmodal/LogoutModal"),
   { ssr: false }
 );
+import { CheckIsEmpty } from "../../component/library/FuncCheckEmpty";
+import { adminSignIn } from "../../redux/action/pagesAdminActions";
+import { connect } from "react-redux";
 
 
 class Index extends Component {
   _isMounted = false;
   static async getInitialProps(ctx) {
-     
-    return { stars: '' }
+    const { query } = ctx;
+    if (CheckIsEmpty(query)) {
+      const { csrfToken } = query._nextExpressData;
+      return { csrfToken: csrfToken };
+    }
   }
   constructor(props) {
     super(props);
   }
   componentDidMount() {
     this._isMounted = true;
+    const { csrfToken } = this.props;
+    this.props.dispatch(adminSignIn(csrfToken));
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.pagesCheckAdmin !== this.props.pagesCheckAdmin) {
+      const { data } = this.props.pagesCheckAdmin;
+      if (data === "Bad Login Info Admin") {
+        if (typeof window !== "undefined") {
+          window.location.href = "/admin/login";
+        }
+      }
+    }
   }
   componentWillUnmount() {
     this._isMounted = false;
   }
   render() {
+    const { data } = this.props.pagesCheckAdmin;
     return (
       <React.Fragment>
-        <Wrapper>
-          <Sidebar>
-            <SideBarMain />
-          </Sidebar>
-          <Content>
-            <TopBar>
-              <SidebarToggle />
-              <TopbarSearch />
-              <TopbarNavbar />
-            </TopBar>
-            <ContainerContent />
-          </Content>
-        </Wrapper>
-        <ScrolltoTopButton />
-        <LogoutModal />
+        {data !== "Bad Login Info Admin" ? (
+          <>
+            <Wrapper>
+              <Sidebar>
+                <SideBarMain />
+              </Sidebar>
+              <Content>
+                <TopBar>
+                  <SidebarToggle />
+                  <TopbarSearch />
+                  <TopbarNavbar />
+                </TopBar>
+                <ContainerContent />
+              </Content>
+            </Wrapper>
+            <ScrolltoTopButton />
+            <LogoutModal />
+          </>
+        ) : null}
       </React.Fragment>
     );
   }
 }
 
-export default LoadingPages(nextExpressPage(Index));
+function mapStateToProps(state) {
+  return {
+    pagesCheckAdmin: state.checkAdminReducers.admin,
+  };
+}
+
+export default connect(mapStateToProps)(LoadingPages(nextExpressPage(Index)));

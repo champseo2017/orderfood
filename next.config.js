@@ -2,6 +2,7 @@ const withPWA = require("next-pwa");
 const withPlugins = require("next-compose-plugins");
 
 const dev = process.env.NODE_ENV !== "production";
+const endPoint = process.env.NODE_ENV !== "production" ? 'http://localhost:8000':'https://orderfoodtestv1.herokuapp.com'
 
 const nextConfig = {
   poweredByHeader: false,
@@ -24,7 +25,7 @@ const nextConfig = {
   },
   env: {
     BUILD_ID: process.env.BUILD_ID,
-    ENDPOINT: "https://orderfoodtestv1.herokuapp.com",
+    ENDPOINT: endPoint,
     CLOUDINARY_API_KEY:'816842862175834'
   },
 };

@@ -49,6 +49,13 @@ app.prepare().then(() => {
   server.all("*", (req, res) => {
     handle(req, res);
   });
+  // error handler
+  server.use(function (err, req, res, next) {
+    if (err.code !== "EBADCSRFTOKEN") return next(err);
+    // handle CSRF token errors here
+    res.status(403);
+    res.send("No, you can t do this");
+  });
 
   // const app = server.listen(port, function (err, result) {
   //   console.log("running in port http://localhost:" + port);
