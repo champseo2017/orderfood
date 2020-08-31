@@ -5,6 +5,7 @@ import { signin } from "../../../../redux/action/authActions";
 import stylesLogin from "./Login.module.css";
 import dynamic from "next/dynamic";
 const Loading = dynamic(() => import("./Loading"), { ssr: false });
+import { reactLocalStorage } from "reactjs-localstorage";
 
 class LoginForm extends PureComponent {
   _isMounted = false;
@@ -43,15 +44,36 @@ class LoginForm extends PureComponent {
       errorEmailSubmit: "",
       errorPassSubmit: "",
       formValid: false,
+      isChecked: false,
     };
     this.onFormChange = this.onFormChange.bind(this);
     this.checkValidator = this.checkValidator.bind(this);
     this.getInputClass = this.getInputClass.bind(this);
     this.getErrorMessage = this.getErrorMessage.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
   }
   componentDidMount() {
     this._isMounted = true;
+    const getEmail = reactLocalStorage.get("email");
+    let updateForm = {
+      ...this.state.formElements,
+    };
+    if (CheckIsEmpty(getEmail)) {
+      updateForm["email"].value = getEmail;
+      updateForm["email"].error.status = false;
+
+      this.setState({
+        ...this.state,
+        formElements: updateForm,
+      });
+
+      const elmCheck = document.getElementById("rememberMeCheck");
+
+      if (CheckIsEmpty(elmCheck)) {
+        elmCheck.setAttribute("checked", "checked");
+      }
+    }
   }
   onFormChange = (event) => {
     if (this._isMounted) {
@@ -78,11 +100,15 @@ class LoginForm extends PureComponent {
             formStatus = !updateForm[name].error.status && formStatus;
           }
         }
-
+        const getEmail = reactLocalStorage.get("email");
+        const elmCheck = document.getElementById("email-admin-form");
         this.setState({
           ...this.state,
           formElements: updateForm,
-          formValid: formStatus,
+          formValid:
+            getEmail || (CheckIsEmpty(elmCheck) && elmCheck.value)
+              ? true
+              : formStatus,
         });
       }
     }
@@ -145,7 +171,10 @@ class LoginForm extends PureComponent {
     }
 
     if (this._isMounted) {
-      if (!CheckIsEmpty(formData.email)) {
+      if (
+        !CheckIsEmpty(formData.email) &&
+        formElements.email.touched !== true
+      ) {
         const setErrorEmail = {
           errorEmailSubmit: "จำเป็นต้องกรอก Email",
         };
@@ -161,7 +190,10 @@ class LoginForm extends PureComponent {
         });
       }
 
-      if (!CheckIsEmpty(formData.password)) {
+      if (
+        !CheckIsEmpty(formData.password) &&
+        formElements.password.touched !== true
+      ) {
         const setErrorPass = {
           errorPassSubmit: "จำเป็นต้องกรอก Password",
         };
@@ -181,9 +213,42 @@ class LoginForm extends PureComponent {
         const { email, password } = formData;
         const { csrfToken, formValid } = this.state;
 
-        if (formValid) {
+        if (
+          formValid &&
+          formElements.password.error.status !== true &&
+          formElements.email.error.status !== true
+        ) {
           this.props.dispatch(signin(email, password, csrfToken));
         }
+      }
+    }
+  };
+
+  onChangeCheckbox = (event) => {
+    const { email } = this.state.formElements;
+
+    const emailElm = [...document.querySelectorAll("input#email-admin-form")];
+
+    if (event.target.checked === true) {
+      if (email.error.status !== true) {
+        const email = emailElm[0].value;
+        reactLocalStorage.set("email", email);
+      } else {
+        reactLocalStorage.remove("email");
+      }
+    } else {
+      reactLocalStorage.remove("email");
+      const elmCheck = document.getElementById("email-admin-form");
+      let updateForm = {
+        ...this.state.formElements,
+      };
+      if (CheckIsEmpty(elmCheck)) {
+        updateForm["email"].value = elmCheck.value;
+        updateForm["email"].error.status = false;
+        this.setState({
+          ...this.state,
+          formElements: updateForm,
+        });
       }
     }
   };
@@ -191,7 +256,7 @@ class LoginForm extends PureComponent {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.dataAdmin !== this.props.dataAdmin) {
       const { data } = this.props.dataAdmin;
-      if (CheckIsEmpty(data)) {
+      if (CheckIsEmpty(data) && data !== "Bad Login Info") {
         if (typeof window !== "undefined") {
           window.location.href = "/admin";
         }
@@ -203,9 +268,14 @@ class LoginForm extends PureComponent {
     this._isMounted = false;
   }
   render() {
-    const { errorEmailSubmit, errorPassSubmit } = this.state;
-    const { isLoading } = this.props.dataAdmin;
-    
+    const {
+      errorEmailSubmit,
+      errorPassSubmit,
+      formElements,
+      isChecked,
+    } = this.state;
+    const { isLoading, data } = this.props.dataAdmin;
+
     return (
       <React.Fragment>
         <div className="container">
@@ -223,6 +293,11 @@ class LoginForm extends PureComponent {
                     <div className="col-lg-6">
                       <div className="p-5">
                         <div className="text-center">
+                          {CheckIsEmpty(data) && data === "Bad Login Info" && (
+                            <div className="alert alert-danger" role="alert">
+                              Something went wrong
+                            </div>
+                          )}
                           {CheckIsEmpty(errorEmailSubmit) && (
                             <div className="alert alert-danger" role="alert">
                               {errorEmailSubmit}
@@ -242,12 +317,13 @@ class LoginForm extends PureComponent {
                             <input
                               type="email"
                               name="email"
+                              id="email-admin-form"
+                              value={formElements.email.value}
                               onChange={this.onFormChange}
                               className={`form-control form-control-user ${this.getInputClass(
                                 "email"
                               )}`}
                               autoComplete="off"
-                              id="exampleInputEmail"
                               aria-describedby="emailHelp"
                               placeholder="Enter Email Address..."
                             />
@@ -261,6 +337,7 @@ class LoginForm extends PureComponent {
                             <input
                               type="password"
                               name="password"
+                              value={formElements.password.value}
                               onChange={this.onFormChange}
                               className={`form-control form-control-user ${this.getInputClass(
                                 "password"
@@ -279,11 +356,12 @@ class LoginForm extends PureComponent {
                               <input
                                 type="checkbox"
                                 className="custom-control-input"
-                                id="customCheck"
+                                id="rememberMeCheck"
+                                onChange={this.onChangeCheckbox}
                               />
                               <label
                                 className="custom-control-label"
-                                for="customCheck"
+                                for="rememberMeCheck"
                               >
                                 Remember Me
                               </label>
@@ -296,7 +374,7 @@ class LoginForm extends PureComponent {
                                 Login
                               </button>
                               <div className={stylesLogin.center}>
-                                <Loading loading={isLoading}/>
+                                <Loading loading={isLoading} />
                               </div>
                             </div>
                             <hr />

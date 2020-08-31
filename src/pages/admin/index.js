@@ -92,6 +92,7 @@ class Index extends Component {
   }
   render() {
     const { data } = this.props.pagesCheckAdmin;
+    const { csrfToken } = this.props;
     return (
       <React.Fragment>
         {data !== "Bad Login Info Admin" ? (
@@ -106,7 +107,7 @@ class Index extends Component {
                   <TopbarSearch />
                   <TopbarNavbar />
                 </TopBar>
-                <ContainerContent />
+                <ContainerContent csrfToken={csrfToken}/>
               </Content>
             </Wrapper>
             <ScrolltoTopButton />

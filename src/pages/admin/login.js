@@ -7,8 +7,12 @@ const LoginForm = dynamic(
   () => import("../../component/admin/include/form/LoginForm"),
   { ssr: false }
 );
-import { adminSignIn } from "../../redux/action/pagesAdminActions";
+import {
+  adminSignIn,
+  clearAdminCheck,
+} from "../../redux/action/pagesAdminActions";
 import { connect } from "react-redux";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 class Login extends Component {
   _isMounted = false;
@@ -22,7 +26,13 @@ class Login extends Component {
   componentDidMount() {
     this._isMounted = true;
     const { csrfToken } = this.props;
-    this.props.dispatch(adminSignIn(csrfToken));
+    const tokenCheck = reactLocalStorage.get("token");
+
+    if (CheckIsEmpty(tokenCheck)) {
+      this.props.dispatch(adminSignIn(csrfToken));
+    } else {
+      this.props.dispatch(clearAdminCheck());
+    }
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.pagesCheckAdmin !== this.props.pagesCheckAdmin) {
@@ -41,9 +51,10 @@ class Login extends Component {
   render() {
     const { csrfToken } = this.props;
     const { data } = this.props.pagesCheckAdmin;
+
     return (
       <React.Fragment>
-        {data === "Bad Login Info Admin" && <LoginForm csrfToken={csrfToken} />}
+        {data !== "You are admin" ? <LoginForm csrfToken={csrfToken} /> : null}
       </React.Fragment>
     );
   }

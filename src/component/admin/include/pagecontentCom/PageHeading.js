@@ -1,9 +1,9 @@
 import React from "react";
 
-const PageHeading = React.memo(() => {
+const PageHeading = React.memo(({name}) => {
   return (
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
+        <h1 className="h3 mb-0 text-gray-800">{name}</h1>
         <a
           href="#"
           className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
@@ -14,5 +14,9 @@ const PageHeading = React.memo(() => {
       </div>
   );
 });
+
+PageHeading.defaultProps = {
+  name: 'Dashboard'
+};
 
 export default PageHeading;

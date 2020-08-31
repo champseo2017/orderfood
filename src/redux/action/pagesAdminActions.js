@@ -26,3 +26,9 @@ export const adminSignIn = (csrfToken) => {
       });
   };
 };
+
+export const clearAdminCheck = () => {
+  return (dispatch) => {
+    dispatch({ type: "ADMINPAGES_CLEAR" });
+  }
+}

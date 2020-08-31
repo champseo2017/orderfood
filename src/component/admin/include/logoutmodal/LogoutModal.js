@@ -1,6 +1,13 @@
 import React from "react";
-
+import { reactLocalStorage } from "reactjs-localstorage";
 const LogoutModal = React.memo(() => {
+  const logOutAdmin = (e) => {
+    e.preventDefault();
+    if (typeof window !== "undefined") {
+      reactLocalStorage.remove("token");
+      window.location.href = "/admin/login";
+    }
+  };
   return (
     <div
       className="modal fade"
@@ -36,7 +43,7 @@ const LogoutModal = React.memo(() => {
             >
               Cancel
             </button>
-            <a className="btn btn-primary" href="login.html">
+            <a onClick={logOutAdmin} className="btn btn-primary">
               Logout
             </a>
           </div>

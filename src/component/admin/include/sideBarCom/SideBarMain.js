@@ -2,14 +2,22 @@ import React from "react";
 import Divider from "../unity/divider/Divider";
 import SidebarHeading from "../unity/sidebarheading/SidebarHeading";
 import SidebarToggler from "../unity/sidebartoggler/SidebarToggler";
+import { clickDashboardUser } from "../../../../redux/action/dashboardActions";
+import { connect } from 'react-redux'
 
-const SideBarMain = React.memo(() => {
+
+const SideBarMain = React.memo((props) => {
   const linkToHomePage = (e) => {
     e.preventDefault();
     if (typeof window !== "undefined") {
       window.location.href = "/";
     }
   };
+
+  const handleClickUser = (e) => {
+    e.preventDefault();
+    props.clickDashboardUser();
+  }
   return (
     <React.Fragment>
       {/* Sidebar - Brand */}
@@ -50,7 +58,7 @@ const SideBarMain = React.memo(() => {
           aria-controls="collapseTwo"
         >
           <i className="fas fa-fw fa-cog"></i>
-          <span>Components</span>
+          <span>Dashboard</span>
         </a>
         <div
           id="collapseTwo"
@@ -80,7 +88,7 @@ const SideBarMain = React.memo(() => {
           aria-controls="collapseUtilities"
         >
           <i className="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
+          <span>Category</span>
         </a>
         <div
           id="collapseUtilities"
@@ -109,7 +117,7 @@ const SideBarMain = React.memo(() => {
       <Divider classDivider="sidebar-divider" />
 
       {/* Heading */}
-      <SidebarHeading classHeading="sidebar-heading">Addons</SidebarHeading>
+      <SidebarHeading classHeading="sidebar-heading">Manage User</SidebarHeading>
 
       {/* Nav Item - Pages Collapse Menu */}
       <li className="nav-item">
@@ -122,7 +130,7 @@ const SideBarMain = React.memo(() => {
           aria-controls="collapsePages"
         >
           <i className="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
+          <span>User</span>
         </a>
         <div
           id="collapsePages"
@@ -131,24 +139,11 @@ const SideBarMain = React.memo(() => {
           data-parent="#accordionSidebar"
         >
           <div className="bg-white py-2 collapse-inner rounded">
-            <h6 className="collapse-header">Login Screens:</h6>
-            <a className="collapse-item" href="login.html">
-              Login
-            </a>
-            <a className="collapse-item" href="register.html">
-              Register
-            </a>
-            <a className="collapse-item" href="forgot-password.html">
-              Forgot Password
+            <h6 className="collapse-header">User:</h6>
+            <a className="collapse-item" onClick={handleClickUser}>
+               Dashboard User
             </a>
             <div className="collapse-divider"></div>
-            <h6 className="collapse-header">Other Pages:</h6>
-            <a className="collapse-item" href="404.html">
-              404 Page
-            </a>
-            <a className="collapse-item" href="blank.html">
-              Blank Page
-            </a>
           </div>
         </div>
       </li>
@@ -160,4 +155,8 @@ const SideBarMain = React.memo(() => {
   );
 });
 
-export default SideBarMain;
+const mapDispatchToProps = {
+  clickDashboardUser
+};
+
+export default connect(null, mapDispatchToProps)(SideBarMain);

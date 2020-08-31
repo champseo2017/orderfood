@@ -17,6 +17,12 @@ module.exports = function (app) {
   app.post("/api/users/store", users.storeCreate);
   app.post("/api/upload", fileUploadMiddleware.fileUploads);
   app.get(
+    "/api/getusers",
+    requireAuth,
+    adminMiddleware.adminProtection,
+    users.getUserList
+  );
+  app.get(
     "/api/images",
     requireAuth,
     adminMiddleware.adminProtection,
