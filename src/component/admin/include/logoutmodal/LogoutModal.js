@@ -1,9 +1,12 @@
 import React from "react";
 import { reactLocalStorage } from "reactjs-localstorage";
-const LogoutModal = React.memo(() => {
+import { connect } from "react-redux";
+import { clearDashboardUser } from "../../../../redux/action/dashboardActions";
+const LogoutModal = React.memo(({clearDashboardUser}) => {
   const logOutAdmin = (e) => {
     e.preventDefault();
     if (typeof window !== "undefined") {
+      clearDashboardUser()
       reactLocalStorage.remove("token");
       window.location.href = "/admin/login";
     }
@@ -53,4 +56,7 @@ const LogoutModal = React.memo(() => {
   );
 });
 
-export default LogoutModal;
+const mapDispatchToProps = {
+  clearDashboardUser,
+};
+export default connect(null, mapDispatchToProps)(LogoutModal);

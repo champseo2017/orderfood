@@ -3,18 +3,9 @@ import PageHeading from "./PageHeading";
 import ContentRow from "./ContentRow";
 import ContentRowUserDashBoard from "./ContentRowUserDashBoard";
 import { connect } from "react-redux";
-import { clearDashboardUser } from "../../../../redux/action/dashboardActions";
 
-const ContainerContent = React.memo(({ dashboardData, clearDashboardUser,csrfToken }) => {
-  useEffect(() => {
-    let mount = true;
-    if (mount) {
-      clearDashboardUser();
-    }
-    return () => {
-      mount = false;
-    };
-  }, []);
+const ContainerContent = React.memo(({ dashboardData,csrfToken }) => {
+  
   const renderHtml = (event) => {
     const { data } = event;
     switch (data) {
@@ -23,7 +14,7 @@ const ContainerContent = React.memo(({ dashboardData, clearDashboardUser,csrfTok
           <React.Fragment>
             <div className="container-fluid">
               <PageHeading name="Dashboard Users" />
-              <ContentRowUserDashBoard csrfToken={csrfToken}/>
+              <ContentRowUserDashBoard csrfToken={csrfToken} pageDashBoard="Dashboard Users"/>
             </div>
           </React.Fragment>
         );
@@ -48,12 +39,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  clearDashboardUser,
-};
+
 
 ContainerContent.defaultProps = {
   csrfToken: ''
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContainerContent);
+export default connect(mapStateToProps)(ContainerContent);

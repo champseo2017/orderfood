@@ -208,7 +208,7 @@ exports.getUserList = asyncHandler(async (req, res, next) => {
       if (err) return next(err);
       connection.query(sql, (err, results) => {
         if (err) return next(err);
-        console.log(results);
+        res.status(200).json(results);
       });
     })
   );

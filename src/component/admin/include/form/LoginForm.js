@@ -374,7 +374,7 @@ class LoginForm extends PureComponent {
                                 Login
                               </button>
                               <div className={stylesLogin.center}>
-                                <Loading loading={isLoading} />
+                                <Loading loading={isLoading} color="#ffffff" size={16}/>
                               </div>
                             </div>
                             <hr />

@@ -1,0 +1,12 @@
+.main_data {
+  position: relative;
+  height: 30.5vh;
+}
+.loading_data_center {
+  margin: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+}

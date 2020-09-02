@@ -1,17 +1,17 @@
 import React from "react";
 import MoonLoader from "react-spinners/MoonLoader";
 
-const Loading = React.memo(({ loading }) => {
+const Loading = React.memo(({ loading, color,size }) => {
   return (
     <React.Fragment>
       <MoonLoader
-        color={"#ffffff"}
+        color={color}
         loading={loading}
         margin={2}
         height={35}
         width={4}
         radius={2}
-        size={16}
+        size={size}
       />
     </React.Fragment>
   );
@@ -19,6 +19,8 @@ const Loading = React.memo(({ loading }) => {
 
 Loading.defaultProps = {
   loading: "",
+  color:'',
+  size:''
 };
 
 export default Loading;

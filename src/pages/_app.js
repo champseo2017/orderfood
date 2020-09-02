@@ -6,6 +6,7 @@ import configureStore from "../store";
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { CheckIsEmpty } from "../component/library/FuncCheckEmpty";
+import '../../public/templateadmin/css/customerDatatable.css'
 
 const { store, persistor } = configureStore();
 
@@ -45,6 +46,8 @@ export default class MyApp extends App {
               href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
               rel="stylesheet"
             />
+            <link href="https://cdn.datatables.net/responsive/2.1.1/css/dataTables.responsive.css"/>
+    <link data-require="datatables@*" data-semver="1.10.12" rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
             {/* Custom fonts for this template vendor/fontawesome-free/css/all.min.css */}
             <link
               href="/templateadmin/vendor/fontawesome-free/css/all.min.css"
