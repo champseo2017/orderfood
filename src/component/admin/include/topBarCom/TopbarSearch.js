@@ -1,4 +1,5 @@
 import React from "react";
+import './topBar.css'
 
 const TopbarSearch = React.memo(() => {
   return (
@@ -11,13 +12,6 @@ const TopbarSearch = React.memo(() => {
           aria-label="Search"
           aria-describedby="basic-addon2"
         />
-        <style jsx>{`
-          input.form-control[type="text"]:focus {
-            border-color: unset;
-            box-shadow: unset;
-            outline:none;
-          }
-        `}</style>
         <div className="input-group-append">
           <button className="btn btn-primary" type="button">
             <i className="fas fa-search fa-sm"></i>

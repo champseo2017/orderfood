@@ -1,8 +1,13 @@
 const withPWA = require("next-pwa");
 const withPlugins = require("next-compose-plugins");
+const withSass = require("@zeit/next-sass");
+const withCSS = require("@zeit/next-css");
 
 const dev = process.env.NODE_ENV !== "production";
-const endPoint = process.env.NODE_ENV !== "production" ? 'http://localhost:8000':'https://orderfoodtestv1.herokuapp.com'
+const endPoint =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:8000"
+    : "https://orderfoodtestv1.herokuapp.com";
 
 const nextConfig = {
   poweredByHeader: false,
@@ -26,12 +31,13 @@ const nextConfig = {
   env: {
     BUILD_ID: process.env.BUILD_ID,
     ENDPOINT: endPoint,
-    CLOUDINARY_API_KEY:'816842862175834'
+    CLOUDINARY_API_KEY: "816842862175834",
   },
 };
 
 module.exports = withPlugins(
-  [
+  [[withCSS],
+  [withSass],
     [
       withPWA,
       {
@@ -109,14 +115,14 @@ module.exports = withPlugins(
             },
             {
               urlPattern: /.*(\/api\/)/i,
-              handler: 'NetworkFirst',
+              handler: "NetworkFirst",
               options: {
-                cacheName: 'others',
+                cacheName: "others",
                 expiration: {
                   maxEntries: 16,
-                  maxAgeSeconds: 24 * 60 * 60 // 24 hours
-                }
-              }
+                  maxAgeSeconds: 24 * 60 * 60, // 24 hours
+                },
+              },
             },
           ],
         },

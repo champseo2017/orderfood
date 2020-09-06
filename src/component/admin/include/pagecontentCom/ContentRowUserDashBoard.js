@@ -1,12 +1,16 @@
 import React, { useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 const Loading = dynamic(() => import("../form/Loading"), { ssr: false });
-import userStyle from "./Pages.module.css";
 import { connect } from "react-redux";
 import { getUserList } from "../../../../redux/action/getUsersActions";
 import { CheckIsEmpty } from "../../../library/FuncCheckEmpty";
 import moment from "moment";
 import { MDBDataTable, MDBBtn } from "mdbreact";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+// import 'animate.css/animate.min.css';
+import "./customerDatatable.scss";
+import "./pages.scss";
 
 const ContentRowUserDashBoard = React.memo(
   ({ csrfToken, pageDashBoard, getUserList, resultDataUser }) => {
@@ -31,6 +35,44 @@ const ContentRowUserDashBoard = React.memo(
       }
     };
 
+    const userManagement = (id, stringValue) => {
+      console.log(id);
+      switch (stringValue) {
+        case "case_edit":
+          return Swal.fire({
+            title: "<strong>HTML <u>example</u></strong>",
+            icon: "info",
+            html:
+              "You can Edit use <b>bold text</b>, " +
+              '<a href="//sweetalert2.github.io">links</a> ' +
+              "and other HTML tags",
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+            confirmButtonAriaLabel: "Thumbs up, great!",
+            cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: "Thumbs down",
+          });
+        case "case_delete":
+          return Swal.fire({
+            title: "<strong>HTML <u>example</u></strong>",
+            icon: "info",
+            html:
+              "You can Delete use <b>bold text</b>, " +
+              '<a href="//sweetalert2.github.io">links</a> ' +
+              "and other HTML tags",
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+            confirmButtonAriaLabel: "Thumbs up, great!",
+            cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: "Thumbs down",
+          });
+      }
+    };
+
     const funcReactDataTable = () => {
       const dataUserList = () => {
         let dataUsersList = [];
@@ -42,18 +84,32 @@ const ContentRowUserDashBoard = React.memo(
               regdate: moment(v.user_regdate).format("LLLL"),
               lastlogin: moment(v.user_last_login).format("LLLL"),
               edituser: (
-                <MDBBtn className="btn btn-warning" size="sm">
+                <MDBBtn
+                  onClick={(e) => {
+                    e.preventDefault();
+                    userManagement(v.user_id, "case_edit");
+                  }}
+                  className="btn btn-warning"
+                  size="sm"
+                >
                   Edit
                 </MDBBtn>
               ),
               delete: (
-                <MDBBtn className="btn btn-danger" size="sm">
+                <MDBBtn
+                  onClick={(e) => {
+                    e.preventDefault();
+                    userManagement(v.user_id, "case_delete");
+                  }}
+                  className="btn btn-danger"
+                  size="sm"
+                >
                   Delete
                 </MDBBtn>
               ),
             };
           });
-        }else{
+        } else {
           dataUsersList = [];
         }
 
@@ -102,8 +158,8 @@ const ContentRowUserDashBoard = React.memo(
 
       if (isLoading === true) {
         return (
-          <div class={`d-flex w-100 main-data ${userStyle.main_data}`}>
-            <div className={`${userStyle.loading_data_center}`}>
+          <div className={`d-flex w-100 main-data main_data`}>
+            <div className={`loading_data_center`}>
               <Loading loading={isLoading} color="#191970" size={25} />
             </div>
           </div>
@@ -113,6 +169,7 @@ const ContentRowUserDashBoard = React.memo(
           <React.Fragment>
             <div id="datatables-react" className="d-flex h-100 w-100">
               <MDBDataTable
+              responsive
                 striped
                 bordered
                 small

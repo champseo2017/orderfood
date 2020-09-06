@@ -1,7 +1,6 @@
-div#data_Users_List div#dataUsersList_wrapper {
-    width: 100%;
+div#datatables-react div.dataTables_wrapper{
+  width: 100%;
 }
-
 /* width */
 ::-webkit-scrollbar {
     width: 0.80em;
@@ -24,9 +23,7 @@ div#data_Users_List div#dataUsersList_wrapper {
     background: #BEB7B5; 
   }
 
-  div#datatables-react div.dataTables_wrapper{
-    width: 100%;
-  }
+  
 
   div#datatables-react div.dataTables_paginate ul.pagination{
     justify-content: flex-end;
@@ -40,5 +37,25 @@ div#data_Users_List div#dataUsersList_wrapper {
     background-color: unset !important;
     border-color: unset !important;
   }
+
+  p.form_add_user_p{
+    font-size: 1.5rem;
+  }
+  
+  
+
+@media only screen and (min-width: 768px) {
+  li.nav-item div.dropdown-menu-right {
+    left: -10em !important;
+    right: 1em !important;
+}
+}
+
+@media only screen and (max-width: 767px) {
+  li.nav-item div.dropdown-menu-right {
+    left: 0 !important;
+    right: auto !important;
+}
+}
 
  

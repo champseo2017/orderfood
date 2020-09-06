@@ -63,7 +63,7 @@ const ContentRow = React.memo(() => {
                         <div
                           className="progress-bar bg-info"
                           role="progressbar"
-                          style="width: 50%"
+                          style={{width:"50%"}}
                           aria-valuenow="50"
                           aria-valuemin="0"
                           aria-valuemax="100"
@@ -218,7 +218,7 @@ const ContentRow = React.memo(() => {
                 <div
                   className="progress-bar bg-danger"
                   role="progressbar"
-                  style="width: 20%"
+                  style={{width: "20%"}}
                   aria-valuenow="20"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -231,7 +231,7 @@ const ContentRow = React.memo(() => {
                 <div
                   className="progress-bar bg-warning"
                   role="progressbar"
-                  style="width: 40%"
+                  style={{width: "40%"}}
                   aria-valuenow="40"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -244,7 +244,7 @@ const ContentRow = React.memo(() => {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style="width: 60%"
+                  style={{width: "60%"}}
                   aria-valuenow="60"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -257,7 +257,7 @@ const ContentRow = React.memo(() => {
                 <div
                   className="progress-bar bg-info"
                   role="progressbar"
-                  style="width: 80%"
+                  style={{width: "80%"}}
                   aria-valuenow="80"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -270,7 +270,7 @@ const ContentRow = React.memo(() => {
                 <div
                   className="progress-bar bg-success"
                   role="progressbar"
-                  style="width: 100%"
+                  style={{width: "100%"}}
                   aria-valuenow="100"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -356,7 +356,7 @@ const ContentRow = React.memo(() => {
               <div className="text-center">
                 <img
                   className="img-fluid px-3 px-sm-4 mt-3 mb-4"
-                  style="width: 25rem;"
+                  style={{width: "25rem"}}
                   src="/templateadmin/img/undraw_posting_photo.svg"
                   alt=""
                 />
@@ -388,7 +388,7 @@ const ContentRow = React.memo(() => {
                 classes are used to create custom components and custom utility
                 classes.
               </p>
-              <p class="mb-0">
+              <p className="mb-0">
                 Before working with this theme, you should become familiar with
                 the Bootstrap framework, especially the utility classes.
               </p>

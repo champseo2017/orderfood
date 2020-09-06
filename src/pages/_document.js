@@ -40,10 +40,7 @@ class MyDocument extends Document {
               {/*Page level plugins vendor/chart.js/Chart.min.js*/}
               <script src="/templateadmin/vendor/chart.js/Chart.min.js" />
                
-               {/*datatables*/}
-               <script data-require="datatables@*" data-semver="1.10.12" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-               <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js"></script>
-
+             
 
             </>
           )}

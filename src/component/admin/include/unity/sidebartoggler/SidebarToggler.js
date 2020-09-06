@@ -23,7 +23,7 @@ const SidebarToggler = React.memo(() => {
   }, []);
   return (
     <React.Fragment>
-      <div class="text-center d-none d-md-inline">
+      <div className="text-center d-none d-md-inline">
         <button className="rounded-circle border-0" id="sidebarToggle" />
       </div>
     </React.Fragment>

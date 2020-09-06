@@ -1,11 +1,11 @@
 import React from "react";
+import "./Loading.css";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import stylesLoading from "./Loading.module.css";
 
 const Loading = React.memo(({ loading }) => {
   return (
-    <div className={stylesLoading.loadmain}>
-      <div className={stylesLoading.loadings}>
+    <div className='loadmain'>
+      <div className='loadings '>
         <ScaleLoader
           color={"#121212"}
           loading={loading}

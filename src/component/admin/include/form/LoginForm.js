@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { CheckIsEmpty } from "../../../library/FuncCheckEmpty";
 import { connect } from "react-redux";
 import { signin } from "../../../../redux/action/authActions";
-import stylesLogin from "./Login.module.css";
+import "./login.css";
 import dynamic from "next/dynamic";
 const Loading = dynamic(() => import("./Loading"), { ssr: false });
 import { reactLocalStorage } from "reactjs-localstorage";
@@ -366,14 +366,14 @@ class LoginForm extends PureComponent {
                                 Remember Me
                               </label>
                             </div>
-                            <div className={stylesLogin.container_main}>
+                            <div className="container_main">
                               <button
                                 type="submit"
                                 class="btn btn-primary btn-user btn-block"
                               >
                                 Login
                               </button>
-                              <div className={stylesLogin.center}>
+                              <div className="center">
                                 <Loading loading={isLoading} color="#ffffff" size={16}/>
                               </div>
                             </div>

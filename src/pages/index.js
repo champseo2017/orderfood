@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import stylesShop from "../component/frontend/css/Shop.module.css";
 import nextExpressPage from "next-express/page";
 import Head from "next/head";
 import dynamic from "next/dynamic";
@@ -31,7 +30,7 @@ class Index extends Component {
         <Head>
           <title>Home</title>
         </Head>
-        <div className={stylesShop.test}>hello</div>
+        <div>hello</div>
         <a
           onClick={() => {
             window.location.href = "/admin";

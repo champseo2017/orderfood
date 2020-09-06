@@ -1,0 +1,5 @@
+input.form-control[type="text"]:focus {
+    border-color: unset;
+    box-shadow: unset;
+    outline:none;
+}
