@@ -1,5 +1,5 @@
 const initialState = {
-  dataUsers: { data: null, isLoading: false, isRejected: false },
+  dataUsers: { data: null, isLoading: null, isRejected: false },
 };
 
 export default (state = initialState, action) => {

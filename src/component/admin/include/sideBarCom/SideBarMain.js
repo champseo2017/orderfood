@@ -150,6 +150,7 @@ const SideBarMain = React.memo((props) => {
       {/* Divider */}
       <Divider classDivider="sidebar-divider d-none d-md-block" />
       {/* Sidebar Toggler (Sidebar) */}
+      <SidebarToggler/>
     
     </React.Fragment>
   );

@@ -8,6 +8,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { CheckIsEmpty } from "../component/library/FuncCheckEmpty";
 import '../../public/templateadmin/css/customerDatatable.css'
 
+
 const { store, persistor } = configureStore();
 
 export default class MyApp extends App {
