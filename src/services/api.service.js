@@ -1,12 +1,11 @@
 import axios from "axios";
 
-export const getAdminPageCheck = (jwtToken, csrfToken, url) => {
+export const getAdminPageCheck = (jwtToken, url) => {
   return axios({
     method: "get",
     url: `${process.env.ENDPOINT}/${url}`,
     headers: {
-      Authorization: jwtToken,
-      "CSRF-Token": csrfToken,
+      Authorization: jwtToken
     },
   })
     .then((res) => {

@@ -13,6 +13,17 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         dasboard: { data: '' },
       });
+      
+      // add users
+      case "ADDUSERCLICK_DASHBOARDUSER":
+      return Object.assign({}, state, {
+        dasboard: { data: 'addUsersDasboard' },
+      });
+
+    case "CLEARADDUSER_DASHBOARDUSER":
+      return Object.assign({}, state, {
+        dasboard: { data: '' },
+      });
     default:
       break;
   }

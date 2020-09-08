@@ -2,34 +2,32 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 const FormAddUser = () => {
-  const { handleSubmit, register, errors } = useForm();
-  const onSubmit = values => console.log(values);
+  const { register, watch, errors, handleSubmit } = useForm();
+  const watchShowAge = watch("showAge", false); // you can supply default value as second argument
+  const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
+  const watchFields = watch(["showAge", "number"]); // you can also target specific fields by their names
+
+  const onSubmit = data => console.log(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        name="email"
-        ref={register({
-          required: "Required",
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: "invalid email address"
-          }
-        })}
-      />
-      {errors.email && errors.email.message}
-
-      <input
-        name="username"
-        ref={register({
-          validate: value => value !== "admin" || "Nice try!"
-        })}
-      />
-      {errors.username && errors.username.message}
-
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          type="text"
+          name="name"
+          ref={register({ required: true, maxLength: 50 })}
+        />
+        <input type="checkbox" name="showAge" ref={register} />
+        {/* based on yes selection to display Age Input*/}
+        {watchShowAge && (
+          <>
+            <input type="number" name="age" ref={register({ min: 50 })} />
+          </>
+        )}
+        <input type="submit" />
+      </form>
+    </>
   );
-};
+}
 
 export default FormAddUser

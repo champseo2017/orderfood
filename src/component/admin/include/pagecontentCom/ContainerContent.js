@@ -3,6 +3,7 @@ import PageHeading from "./PageHeading";
 import ContentRow from "./ContentRow";
 import ContentRowUserDashBoard from "./ContentRowUserDashBoard";
 import { connect } from "react-redux";
+import PageAddUser from './addUser/PageAddUser'
 
 const ContainerContent = React.memo(({ dashboardData,csrfToken }) => {
   
@@ -15,6 +16,16 @@ const ContainerContent = React.memo(({ dashboardData,csrfToken }) => {
             <div className="container-fluid">
               <PageHeading name="Dashboard Users" />
               <ContentRowUserDashBoard csrfToken={csrfToken} pageDashBoard="Dashboard Users"/>
+            </div>
+          </React.Fragment>
+        );
+
+        case "addUsersDasboard":
+        return (
+          <React.Fragment>
+            <div className="container-fluid">
+              <PageHeading name="add users" titleHead="เพิ่ม Users"/>
+              <PageAddUser />
             </div>
           </React.Fragment>
         );

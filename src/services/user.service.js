@@ -1,5 +1,5 @@
 import { getAdminPageCheck } from './api.service'
 
-export const setUpPasswordV1 = (jwtToken, csrfToken, url) => {
-    return getAdminPageCheck(jwtToken, csrfToken, url)
+export const checkAdminRole = (jwtToken, url) => {
+    return getAdminPageCheck(jwtToken, url)
   }
