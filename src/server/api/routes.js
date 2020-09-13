@@ -9,6 +9,7 @@ const requireSignin = passport.authenticate("local", { session: false });
 const requireAuth = passport.authenticate("jwt", { session: false });
 const adminMiddleware = require("../middleware/adminMiddleware");
 const adminPage = require("../controllers/CheckAdmin");
+const adminAddUser = require('../controllers/adminAddUser');
 
 module.exports = function (app) {
   const csrfProtection = csrf({ cookie: true });
@@ -28,6 +29,7 @@ module.exports = function (app) {
     adminMiddleware.adminProtection,
     getImages.getImage
   );
+
   app.get(
     "/api/checkadminpages",
     csrfProtection,
@@ -35,5 +37,15 @@ module.exports = function (app) {
     adminMiddleware.adminProtection,
     adminPage.checkAdminPage
   );
+
+  // admin add users
+  app.post(
+    "/api/addusers",
+    csrfProtection,
+    requireAuth,
+    adminMiddleware.adminProtection,
+    adminAddUser.addUsers
+  );
+
   app.post("/api/adminlogin", csrfProtection, requireSignin, users.signin);
 };

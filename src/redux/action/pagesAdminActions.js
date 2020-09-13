@@ -1,8 +1,8 @@
 import axios from "axios";
-import { reactLocalStorage } from "reactjs-localstorage";
+import { getWithExpiry } from "../../commonFunc/setwithexpirylocalstrage";
 const BASE_URL = process.env.ENDPOINT;
 export const adminSignIn = (csrfToken) => {
-  const jwtToken = reactLocalStorage.get("token");
+  const jwtToken = getWithExpiry("token");
   return (dispatch) => {
     return axios({
       method: "get",
@@ -21,7 +21,10 @@ export const adminSignIn = (csrfToken) => {
       })
       .catch((error) => {
         if (error) {
-          dispatch({ type: "ADMINPAGES_REJECTED", payload: "Bad Login Info Admin" });
+          dispatch({
+            type: "ADMINPAGES_REJECTED",
+            payload: "Bad Login Info Admin",
+          });
         }
       });
   };
@@ -30,5 +33,5 @@ export const adminSignIn = (csrfToken) => {
 export const clearAdminCheck = () => {
   return (dispatch) => {
     dispatch({ type: "ADMINPAGES_CLEAR" });
-  }
-}
+  };
+};

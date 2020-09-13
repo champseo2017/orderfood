@@ -2,7 +2,7 @@ const initialState = {
   dataUsers: { data: null, isLoading: null, isRejected: false },
 };
 
-export default (state = initialState, action) => {
+const dashboardGetUsersReducers = (state = initialState, action) => {
   switch (action.type) {
     case "LOADUSERSLIST_PENDING":
       return Object.assign({}, state, {
@@ -26,3 +26,5 @@ export default (state = initialState, action) => {
   }
   return state;
 };
+
+export default dashboardGetUsersReducers

@@ -5,7 +5,7 @@ import moment from "moment";
 import { CheckIsEmpty } from "../../../library/FuncCheckEmpty";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-import FormAddUser from "./formAddUser/FormAddUser";
+
 import { clickAddUserDashboardUser } from "../../../../redux/action/dashboardActions";
 import BlackButton from "./blackButton/BlackButton";
 
@@ -31,14 +31,16 @@ const PageHeading = React.memo(
           const dataUser = [];
 
           if (CheckIsEmpty(data) && data) {
-            data.map((v, k) => {
-              dataUser[k] = {
-                userid: v.user_id,
-                username: v.user_name,
-                regdate: moment(v.user_regdate).format("LLLL"),
-                lastlogin: moment(v.user_last_login).format("LLLL"),
-              };
-            });
+            try {
+              data.map((v, k) => {
+                dataUser[k] = {
+                  userid: v.user_id,
+                  username: v.user_name,
+                  regdate: moment(v.user_regdate).format("LLLL"),
+                  lastlogin: moment(v.user_last_login).format("LLLL"),
+                };
+              });
+            } catch (error) {}
           }
 
           const fileNameCsv = name.toLowerCase();
@@ -82,7 +84,7 @@ const PageHeading = React.memo(
             <React.Fragment>
               <div className="d-flex align-items-center mb-4">
                 <div className="mr-3">
-                  <BlackButton pagesBack="dashboard_users"/>
+                  <BlackButton pagesBack="dashboard_users" />
                 </div>
                 <div>
                   <h1 className="h3 mb-0 text-gray-800">{titleHead}</h1>

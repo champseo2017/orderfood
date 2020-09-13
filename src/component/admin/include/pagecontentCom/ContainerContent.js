@@ -25,7 +25,7 @@ const ContainerContent = React.memo(({ dashboardData,csrfToken }) => {
           <React.Fragment>
             <div className="container-fluid">
               <PageHeading name="add users" titleHead="เพิ่ม Users"/>
-              <PageAddUser />
+              <PageAddUser csrfToken={csrfToken}/>
             </div>
           </React.Fragment>
         );

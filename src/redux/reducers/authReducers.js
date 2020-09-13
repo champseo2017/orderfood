@@ -2,7 +2,7 @@ const initialState = {
   admin: { data: null, isLoading: false, isRejected: false },
 };
 
-export default (state = initialState, action) => {
+const authReducers = (state = initialState, action) => {
   switch (action.type) {
     case "LOGINADMIN_PENDING":
       return Object.assign({}, state, {
@@ -27,3 +27,5 @@ export default (state = initialState, action) => {
   }
   return state;
 };
+
+export default authReducers

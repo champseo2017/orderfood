@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { CheckIsEmpty } from "../component/library/FuncCheckEmpty";
+import { isMobile } from 'mobile-device-detect';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -24,7 +25,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head />
-        <body id="page-top" className={classPage ? classPage:'default'}>
+        <body id="page-top" className={`${classPage ? classPage:'default'} ${isMobile ? 'sidebar-toggled':''}`}>
           <Main />
           <NextScript />
           {page === "admin" && (

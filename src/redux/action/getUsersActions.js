@@ -1,5 +1,5 @@
 import axios from "axios";
-import { reactLocalStorage } from "reactjs-localstorage";
+import { getWithExpiry } from "../../commonFunc/setwithexpirylocalstrage";
 import {
   LOADUSERSLIST_PENDING,
   LOADUSERSLIST_SUCCESS,
@@ -8,7 +8,7 @@ import {
 
 const BASE_URL = process.env.ENDPOINT;
 export const getUserList = () => {
-  const jwtToken = reactLocalStorage.get("token");
+  const jwtToken = getWithExpiry("token");
   return (dispatch) => {
     dispatch({ type: LOADUSERSLIST_PENDING });
     return axios({
@@ -20,11 +20,11 @@ export const getUserList = () => {
     })
       .then((response) => {
         setTimeout(() => {
-            dispatch({
-              type: LOADUSERSLIST_SUCCESS,
-              payload: response.data,
-            });
-          }, 1000);
+          dispatch({
+            type: LOADUSERSLIST_SUCCESS,
+            payload: response.data,
+          });
+        }, 1000);
       })
       .catch((error) => {
         if (error) {

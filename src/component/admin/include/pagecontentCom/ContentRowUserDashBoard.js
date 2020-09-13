@@ -36,7 +36,7 @@ const ContentRowUserDashBoard = React.memo(
     };
 
     const userManagement = (id, stringValue) => {
-      console.log(id);
+     
       switch (stringValue) {
         case "case_edit":
           return Swal.fire({
@@ -77,38 +77,40 @@ const ContentRowUserDashBoard = React.memo(
       const dataUserList = () => {
         let dataUsersList = [];
         if (CheckIsEmpty(data)) {
-          data.map((v, k) => {
-            dataUsersList[k] = {
-              id: v.user_id,
-              username: v.user_name,
-              regdate: moment(v.user_regdate).format("LLLL"),
-              lastlogin: moment(v.user_last_login).format("LLLL"),
-              edituser: (
-                <MDBBtn
-                  onClick={(e) => {
-                    e.preventDefault();
-                    userManagement(v.user_id, "case_edit");
-                  }}
-                  className="btn btn-warning"
-                  size="sm"
-                >
-                  Edit
-                </MDBBtn>
-              ),
-              delete: (
-                <MDBBtn
-                  onClick={(e) => {
-                    e.preventDefault();
-                    userManagement(v.user_id, "case_delete");
-                  }}
-                  className="btn btn-danger"
-                  size="sm"
-                >
-                  Delete
-                </MDBBtn>
-              ),
-            };
-          });
+          try {
+            data.map((v, k) => {
+              dataUsersList[k] = {
+                id: v.user_id,
+                username: v.user_name,
+                regdate: moment(v.user_regdate).format("LLLL"),
+                lastlogin: moment(v.user_last_login).format("LLLL"),
+                edituser: (
+                  <MDBBtn
+                    onClick={(e) => {
+                      e.preventDefault();
+                      userManagement(v.user_id, "case_edit");
+                    }}
+                    className="btn btn-warning"
+                    size="sm"
+                  >
+                    Edit
+                  </MDBBtn>
+                ),
+                delete: (
+                  <MDBBtn
+                    onClick={(e) => {
+                      e.preventDefault();
+                      userManagement(v.user_id, "case_delete");
+                    }}
+                    className="btn btn-danger"
+                    size="sm"
+                  >
+                    Delete
+                  </MDBBtn>
+                ),
+              };
+            });
+          } catch (error) {}
         } else {
           dataUsersList = [];
         }
@@ -169,7 +171,7 @@ const ContentRowUserDashBoard = React.memo(
           <React.Fragment>
             <div id="datatables-react" className="d-flex h-100 w-100">
               <MDBDataTable
-              responsive
+                responsive
                 striped
                 bordered
                 small

@@ -2,7 +2,7 @@ const initialState = {
   dasboard: { data: '' },
 };
 
-export default (state = initialState, action) => {
+const dashboardReducers = (state = initialState, action) => {
   switch (action.type) {
     case "USERCLICK_DASHBOARDUSER":
       return Object.assign({}, state, {
@@ -29,3 +29,4 @@ export default (state = initialState, action) => {
   }
   return state;
 };
+export default dashboardReducers

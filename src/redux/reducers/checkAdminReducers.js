@@ -2,7 +2,7 @@ const initialState = {
   admin: { data: null, isLoading: false, isRejected: false },
 };
 
-export default (state = initialState, action) => {
+const checkAdminReducers = (state = initialState, action) => {
   switch (action.type) {
     case "ADMINPAGES_SUCCESS":
       return Object.assign({}, state, {
@@ -22,3 +22,4 @@ export default (state = initialState, action) => {
   }
   return state;
 };
+export default checkAdminReducers
