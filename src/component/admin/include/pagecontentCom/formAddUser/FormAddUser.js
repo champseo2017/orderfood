@@ -60,7 +60,7 @@ const FormAddUser = React.memo(({ props, appType,clickDashboardUser,submitForm})
           <div className="col-12">
             <form
               onSubmit={props.handleSubmit}
-              className="form_user_style border border-dark m-auto rounded custome-adduser-style w-50"
+              className="form_user_style border border-dark m-auto rounded custome-adduser-style w-50 mb-3"
             >
               <div className="form-group">
                 <label>Email</label>

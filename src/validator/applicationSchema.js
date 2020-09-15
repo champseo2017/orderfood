@@ -1,6 +1,6 @@
 import { object, array, string, number, date, boolean,ref } from 'yup'
 
-const schema = object().shape({
+const schemaAddUserAdmin = object().shape({
     user_email: string()
     .required('The email field is required.')
     .email('Must be a valid email'),
@@ -19,4 +19,4 @@ const schema = object().shape({
     .required('The user role field is required.'),
 })
 
-export const validateApplication = object({ addUser: schema })
+export const validateApplication = object({ addUser: schemaAddUserAdmin })

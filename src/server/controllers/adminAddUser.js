@@ -80,9 +80,23 @@ exports.addUsers = asyncHandler(async (req, res, next) => {
     });
   };
 
+  /* func Userrole */
+  const userRoleFunc = (uasername) => {
+    return new Promise((resolve, reject) => {
+      const strTags = striptags(uasername);
+      const removeSpace = removeWhitespace(strTags);
+      if (isNullOrEmpty(removeSpace)) {
+        reject("Userrole is require.");
+      } else {
+        resolve(removeSpace);
+      }
+    });
+  };
+
   let resultEmail = "";
   let resultPassword = "";
   let resultUserName = "";
+  let resultUserRole = "";
 
   /* Email */
   resultEmail = await emailFunc(user_email)
@@ -142,4 +156,33 @@ exports.addUsers = asyncHandler(async (req, res, next) => {
           break;
       }
     });
+
+  /* resultUserRole */
+  resultUserRole = await userRoleFunc(user_role)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      switch (error) {
+        case "Userrole is require.":
+          res.status(200).json({ message: "Userrole is require." });
+          res.end();
+          break;
+
+        default:
+          res.status(200).json({ message: "Error" });
+          res.end();
+          break;
+      }
+    });
+
+  // sends Data
+  const objSendsDb = {
+    user_email: isNullOrEmpty(resultEmail) ? null : resultEmail,
+    user_name: isNullOrEmpty(resultUserName) ? null : resultUserName,
+    user_password: isNullOrEmpty(resultPassword) ? null : resultPassword,
+    user_role: isNullOrEmpty(resultUserRole) ? null : resultUserRole,
+  };
+
+  console.log(objSendsDb)
 });
