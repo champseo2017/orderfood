@@ -27,12 +27,10 @@ export const addUserAdmin = ({ ...data }) => {
     })
       .then((response) => {
         const { data } = response;
-        setTimeout(() => {
-          dispatch({
-            type: INSERTUSERADMINDB_SUCCESS,
-            payload: data,
-          });
-        }, 1500);
+        dispatch({
+          type: INSERTUSERADMINDB_SUCCESS,
+          payload: data,
+        });
       })
       .catch((error) => {
         if (error) {
@@ -41,3 +39,9 @@ export const addUserAdmin = ({ ...data }) => {
       });
   };
 };
+
+export const clearAddUserAdmin = () => {
+  return (dispatch) => {
+    dispatch({ type: CLEARINSERTUSER_DB });
+  }
+}

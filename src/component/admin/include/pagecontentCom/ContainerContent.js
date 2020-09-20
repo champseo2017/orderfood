@@ -4,11 +4,17 @@ import ContentRow from "./ContentRow";
 import ContentRowUserDashBoard from "./ContentRowUserDashBoard";
 import { connect } from "react-redux";
 import PageAddUser from './addUser/PageAddUser'
+import { CheckIsEmpty } from "../../../library/FuncCheckEmpty";
 
 const ContainerContent = React.memo(({ dashboardData,csrfToken }) => {
-  
+
   const renderHtml = (event) => {
-    const { data } = event;
+    let data = ''
+    if(CheckIsEmpty(event.dasboard.data)){
+      data = event.dasboard.data
+    }else if(CheckIsEmpty(event.dasboardUser.data)){
+      data = event.dasboardUser.data
+    }
     switch (data) {
       case "usersDasboard":
         return (
@@ -46,7 +52,7 @@ const ContainerContent = React.memo(({ dashboardData,csrfToken }) => {
 
 const mapStateToProps = (state) => {
   return {
-    dashboardData: state.dashboardReducers.dasboard,
+    dashboardData: state.dashboardReducers,
   };
 };
 

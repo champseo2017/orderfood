@@ -11,6 +11,8 @@ import "sweetalert2/src/sweetalert2.scss";
 // import 'animate.css/animate.min.css';
 import "./customerDatatable.scss";
 import "./pages.scss";
+import "dayjs/locale/es"; // load on demand
+const dayjs = require("dayjs");
 
 const ContentRowUserDashBoard = React.memo(
   ({ csrfToken, pageDashBoard, getUserList, resultDataUser }) => {
@@ -36,7 +38,6 @@ const ContentRowUserDashBoard = React.memo(
     };
 
     const userManagement = (id, stringValue) => {
-     
       switch (stringValue) {
         case "case_edit":
           return Swal.fire({
@@ -79,11 +80,22 @@ const ContentRowUserDashBoard = React.memo(
         if (CheckIsEmpty(data)) {
           try {
             data.map((v, k) => {
+              const checkLastLogin = moment(v.user_last_login);
+              const { _isValid } = checkLastLogin;
+
+              const regDate = dayjs(v.user_regdate).format(
+                "D/MM/YYYY HH:mm:ss"
+              );
+
+              const lastLogin = _isValid
+                ? dayjs(v.user_last_login).format("D/MM/YYYY HH:mm:ss")
+                : "Wait update";
+
               dataUsersList[k] = {
                 id: v.user_id,
                 username: v.user_name,
-                regdate: moment(v.user_regdate).format("LLLL"),
-                lastlogin: moment(v.user_last_login).format("LLLL"),
+                regdate: regDate,
+                lastlogin: lastLogin,
                 edituser: (
                   <MDBBtn
                     onClick={(e) => {
@@ -126,7 +138,7 @@ const ContentRowUserDashBoard = React.memo(
             {
               label: "User Name",
               field: "username",
-              sort: "desc",
+              sort: "asc",
               width: 270,
             },
             {
@@ -176,7 +188,7 @@ const ContentRowUserDashBoard = React.memo(
                 bordered
                 small
                 data={dataUserList()}
-                order={["username", "desc"]}
+                order={["id", "desc"]}
               />
             </div>
           </React.Fragment>

@@ -9,8 +9,13 @@ const requireSignin = passport.authenticate("local", { session: false });
 const requireAuth = passport.authenticate("jwt", { session: false });
 const adminMiddleware = require("../middleware/adminMiddleware");
 const adminPage = require("../controllers/CheckAdmin");
-const adminAddUser = require('../controllers/adminAddUser');
+const adminAddUser = require("../controllers/adminAddUser");
+const cors = require("cors");
 
+const corsOptions = {
+  origin: "http://localhost:8000",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 module.exports = function (app) {
   const csrfProtection = csrf({ cookie: true });
   const storage = multer.memoryStorage();
@@ -19,19 +24,15 @@ module.exports = function (app) {
   app.post("/api/upload", fileUploadMiddleware.fileUploads);
   app.get(
     "/api/getusers",
+    cors(corsOptions),
     requireAuth,
     adminMiddleware.adminProtection,
     users.getUserList
   );
-  app.get(
-    "/api/images",
-    requireAuth,
-    adminMiddleware.adminProtection,
-    getImages.getImage
-  );
 
   app.get(
     "/api/checkadminpages",
+    cors(corsOptions),
     csrfProtection,
     requireAuth,
     adminMiddleware.adminProtection,
@@ -41,11 +42,18 @@ module.exports = function (app) {
   // admin add users
   app.post(
     "/api/addusers",
+    cors(corsOptions),
     csrfProtection,
     requireAuth,
     adminMiddleware.adminProtection,
     adminAddUser.addUsers
   );
 
-  app.post("/api/adminlogin", csrfProtection, requireSignin, users.signin);
+  app.post(
+    "/api/adminlogin",
+    cors(corsOptions),
+    csrfProtection,
+    requireSignin,
+    users.signin
+  );
 };

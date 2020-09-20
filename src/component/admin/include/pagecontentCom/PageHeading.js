@@ -15,7 +15,9 @@ const PageHeading = React.memo(
 
     const handleClickAddUser = (e) => {
       e.preventDefault();
+      console.log(e)
       clickAddUserDashboardUser();
+     
     };
 
     const renderHtml = () => {
@@ -33,11 +35,17 @@ const PageHeading = React.memo(
           if (CheckIsEmpty(data) && data) {
             try {
               data.map((v, k) => {
+                const checkLastLogin = moment(v.user_last_login);
+                const { _isValid } = checkLastLogin;
+                const regDate = moment(v.user_regdate).toDate()
+                const lastLogin = _isValid
+                  ? moment(v.user_last_login).toDate()
+                  : "Wait update";
                 dataUser[k] = {
                   userid: v.user_id,
                   username: v.user_name,
-                  regdate: moment(v.user_regdate).format("LLLL"),
-                  lastlogin: moment(v.user_last_login).format("LLLL"),
+                  regdate: regDate,
+                  lastlogin: lastLogin,
                 };
               });
             } catch (error) {}
@@ -111,11 +119,11 @@ PageHeading.defaultProps = {
   name: "Dashboard",
   resultDataUser: "",
   clickAddUserDashboardUser: "",
-  titleHead: "",
+  titleHead: ""
 };
 
 const mapDispatchToProps = {
-  clickAddUserDashboardUser,
+  clickAddUserDashboardUser
 };
 
 const mapStateToProps = (state) => {

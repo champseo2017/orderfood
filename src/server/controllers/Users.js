@@ -202,7 +202,7 @@ exports.signin = (req, res, next) => {
 };
 
 exports.getUserList = asyncHandler(async (req, res, next) => {
-  const sql = `SELECT user_id, user_name, user_regdate, user_last_login FROM tbl_user ORDER BY user_name`;
+  const sql = `SELECT user_id, user_name, user_regdate, user_last_login FROM tbl_user ORDER BY user_id DESC`;
   req.getConnection(
     asyncHandler(async (err, connection) => {
       if (err) return next(err);

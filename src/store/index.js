@@ -7,7 +7,7 @@ import rootReducer from '../redux/reducers';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['authReducers','dashboardGetUsersReducers','addusersReducers'] 
+  blacklist: ['authReducers','dashboardGetUsersReducers','addusersReducers','addUserAdminReducers']
   // whitelist: ['language']
 };
 

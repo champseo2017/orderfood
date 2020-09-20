@@ -1,5 +1,6 @@
 const initialState = {
   dasboard: { data: '' },
+  dasboardUser: { data: '' }
 };
 
 const dashboardReducers = (state = initialState, action) => {
@@ -17,12 +18,13 @@ const dashboardReducers = (state = initialState, action) => {
       // add users
       case "ADDUSERCLICK_DASHBOARDUSER":
       return Object.assign({}, state, {
-        dasboard: { data: 'addUsersDasboard' },
+        dasboard: { data: '' },
+        dasboardUser: { data: 'addUsersDasboard' },
       });
 
     case "CLEARADDUSER_DASHBOARDUSER":
       return Object.assign({}, state, {
-        dasboard: { data: '' },
+        dasboardUser: { data: '' },
       });
     default:
       break;

@@ -21,6 +21,10 @@ const addUserAdminReducers =  (state = initialState, action) => {
       return Object.assign({}, state, {
         addUser: { data: action.payload, isLoading: false, isRejected: true },
       });
+      case "CLEARINSERTUSER_DB":
+      return Object.assign({}, state, {
+        addUser: { data: '', isLoading: false, isRejected: false },
+      });
   }
   return state;
 };

@@ -10,6 +10,7 @@ export const clickDashboardUser = () => {
 
 export const clearDashboardUser = () => {
     return (dispatch) => {
+      console.log('CLEAR_DASHBOARDUSER')
       dispatch({ type: "CLEAR_DASHBOARDUSER" });
     }
 }

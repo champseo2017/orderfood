@@ -7,6 +7,14 @@ import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { CheckIsEmpty } from "../component/library/FuncCheckEmpty";
 
+const dayjs = require("dayjs");
+const utc = require("dayjs/plugin/utc"); // dependent on utc plugin
+const timezone = require("dayjs/plugin/timezone");
+dayjs.locale("th");
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Bangkok");
+
 const { store, persistor } = configureStore();
 
 export default class MyApp extends App {
@@ -46,8 +54,13 @@ export default class MyApp extends App {
               rel="stylesheet"
             />
 
-    <link data-require="datatables@*" data-semver="1.10.12" rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-          
+            <link
+              data-require="datatables@*"
+              data-semver="1.10.12"
+              rel="stylesheet"
+              href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"
+            />
+
             {/* Custom fonts for this template vendor/fontawesome-free/css/all.min.css */}
             <link
               href="/templateadmin/vendor/fontawesome-free/css/all.min.css"
