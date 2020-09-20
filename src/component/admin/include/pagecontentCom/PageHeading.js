@@ -15,9 +15,7 @@ const PageHeading = React.memo(
 
     const handleClickAddUser = (e) => {
       e.preventDefault();
-      console.log(e)
       clickAddUserDashboardUser();
-     
     };
 
     const renderHtml = () => {
@@ -37,7 +35,7 @@ const PageHeading = React.memo(
               data.map((v, k) => {
                 const checkLastLogin = moment(v.user_last_login);
                 const { _isValid } = checkLastLogin;
-                const regDate = moment(v.user_regdate).toDate()
+                const regDate = moment(v.user_regdate).toDate();
                 const lastLogin = _isValid
                   ? moment(v.user_last_login).toDate()
                   : "Wait update";
@@ -119,11 +117,11 @@ PageHeading.defaultProps = {
   name: "Dashboard",
   resultDataUser: "",
   clickAddUserDashboardUser: "",
-  titleHead: ""
+  titleHead: "",
 };
 
 const mapDispatchToProps = {
-  clickAddUserDashboardUser
+  clickAddUserDashboardUser,
 };
 
 const mapStateToProps = (state) => {

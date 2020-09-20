@@ -4,6 +4,7 @@ import {
   LOADUSERSLIST_PENDING,
   LOADUSERSLIST_SUCCESS,
   LOADUSERSLIST_REJECTED,
+  LOADUSERSLIST_CLEAR
 } from "./actionTypes";
 
 const BASE_URL = process.env.ENDPOINT;
@@ -33,3 +34,9 @@ export const getUserList = () => {
       });
   };
 };
+
+export const clearUserList = () => {
+  return (dispatch) => {
+    dispatch({ type: LOADUSERSLIST_CLEAR });
+  }
+}

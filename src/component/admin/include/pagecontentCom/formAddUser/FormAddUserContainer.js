@@ -30,7 +30,7 @@ const FormAddUserContainer = React.memo(
     };
 
     const [submitForm, setSubmitForm] = useState(false);
-
+    
     useEffect(() => {
       let mount = true;
       if (mount) {
@@ -73,6 +73,8 @@ const FormAddUserContainer = React.memo(
                 csrf: csrfToken,
                 user_email: user_email,
               };
+              const setSubmit = true;
+              setSubmitForm(setSubmit);
 
               addUserAdmin(objData);
             }
@@ -83,6 +85,7 @@ const FormAddUserContainer = React.memo(
               props={props}
               appType="addUser"
               submitForm={submitForm}
+              dataAddUser={dataAddUser}
             />
           )}
         </Formik>

@@ -18,6 +18,7 @@ const {
 exports.addUsers = asyncHandler(async (req, res, next) => {
   const { user_name, user_password, user_role, user_email } = req.body;
   /* email func */
+  
   const emailFunc = (email) => {
     return new Promise((resolve, reject) => {
       const strTags = striptags(email);
@@ -104,6 +105,11 @@ exports.addUsers = asyncHandler(async (req, res, next) => {
   let resultUserName = "";
   let resultUserRole = "";
 
+  const returnMessage = {
+    error:'',
+    message:''
+  }
+
   /* Email */
   resultEmail = await emailFunc(user_email)
     .then((res) => {
@@ -112,15 +118,18 @@ exports.addUsers = asyncHandler(async (req, res, next) => {
     .catch((error) => {
       switch (error) {
         case "Invalid email format.":
-          res.status(200).json({ error: "Invalid email format." });
+          returnMessage.error = "Invalid email format."
+          res.status(200).json({ error: returnMessage.error });
           res.end();
           break;
         case "Email address is require.":
-          res.status(200).json({ error: "Email address is require." });
+          returnMessage.error = "Email address is require."
+          res.status(200).json({ error: returnMessage.error });
           res.end();
           break;
         default:
-          res.status(200).json({ error: "Error" });
+          returnMessage.error = "Error."
+          res.status(200).json({ error: returnMessage.error });
           res.end();
           break;
       }
@@ -133,13 +142,16 @@ exports.addUsers = asyncHandler(async (req, res, next) => {
     })
     .catch((error) => {
       if (error === "Password is require.") {
-        res.status(200).json({ error: "Password is require." });
+        returnMessage.error = "Password is require."
+        res.status(200).json({ error: returnMessage.error });
         res.end();
       } else if (Array.isArray(error)) {
-        res.status(200).json({ error: error });
+        returnMessage.error = error
+        res.status(200).json({ error: returnMessage.error });
         res.end();
       } else {
-        res.status(200).json({ error: "Error" });
+        returnMessage.error = "Error"
+        res.status(200).json({ error: returnMessage.error });
         res.end();
       }
     });
@@ -152,11 +164,13 @@ exports.addUsers = asyncHandler(async (req, res, next) => {
     .catch((error) => {
       switch (error) {
         case "Username is require.":
-          res.status(200).json({ error: "Username is require." });
+          returnMessage.error = "Username is require."
+          res.status(200).json({ error: returnMessage.error });
           res.end();
           break;
 
         default:
+          returnMessage.error = "Error"
           res.status(200).json({ error: "Error" });
           res.end();
           break;
@@ -171,12 +185,14 @@ exports.addUsers = asyncHandler(async (req, res, next) => {
     .catch((error) => {
       switch (error) {
         case "Userrole is require.":
-          res.status(200).json({ error: "Userrole is require." });
+          returnMessage.error = "Userrole is require."
+          res.status(200).json({ error: returnMessage.error });
           res.end();
           break;
 
         default:
-          res.status(200).json({ error: "Error" });
+          returnMessage.error = "Error"
+          res.status(200).json({ error: returnMessage.error });
           res.end();
           break;
       }
@@ -222,17 +238,20 @@ exports.addUsers = asyncHandler(async (req, res, next) => {
                   const insertData = "insert into tbl_user set ? ";
                   connection.query(insertData, [objSendsDb], (err, row) => {
                     if (err) return next(err);
-                    res.status(200).json({ message: addDataUserSuccess });
+                    returnMessage.message = addDataUserSuccess
+                    res.status(200).json({ message: returnMessage.message });
                     res.end();
                   });
                 } else if (checkRowUsername === false) {
-                  res.status(200).json({ error: duplicateUsername });
+                  returnMessage.error = duplicateUsername
+                  res.status(200).json({ error: returnMessage.error });
                   res.end();
                 }
               }
             );
           } else if (checkRowEmail === false) {
-            res.status(200).json({ error: duplicateEmail });
+            returnMessage.error = duplicateEmail
+            res.status(200).json({ error: returnMessage.error });
             res.end();
           }
         });

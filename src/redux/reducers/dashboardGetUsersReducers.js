@@ -1,5 +1,5 @@
 const initialState = {
-  dataUsers: { data: null, isLoading: null, isRejected: false },
+  dataUsers: { data: null, isLoading: null, isRejected: null },
 };
 
 const dashboardGetUsersReducers = (state = initialState, action) => {
@@ -20,6 +20,10 @@ const dashboardGetUsersReducers = (state = initialState, action) => {
     case "LOADUSERSLIST_REJECTED":
       return Object.assign({}, state, {
         dataUsers: { data: action.payload, isLoading: false, isRejected: true },
+      });
+    case "LOADUSERSLIST_CLEAR":
+      return Object.assign({}, state, {
+        dataUsers: { data: null, isLoading: null, isRejected: null },
       });
     default:
       break;
