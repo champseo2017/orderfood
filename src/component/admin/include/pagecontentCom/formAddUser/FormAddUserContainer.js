@@ -9,6 +9,8 @@ import {
 } from "../../../../../redux/action/addUsersAdmin/addUsersDbAction";
 import { CheckIsEmpty } from "../../../../library/FuncCheckEmpty";
 import { clickDashboardUser } from "../../../../../redux/action/dashboardActions";
+import { saveUserSuccess } from "../../../../../redux/action/alertactivity/alertactivityActions";
+
 const FormAddUserContainer = React.memo(
   ({
     addUserAdmin,
@@ -16,6 +18,7 @@ const FormAddUserContainer = React.memo(
     csrfToken,
     clickDashboardUser,
     clearAddUserAdmin,
+    saveUserSuccess,
   }) => {
     const fieldUser = {
       user_name: "",
@@ -30,7 +33,7 @@ const FormAddUserContainer = React.memo(
     };
 
     const [submitForm, setSubmitForm] = useState(false);
-    
+
     useEffect(() => {
       let mount = true;
       if (mount) {
@@ -43,6 +46,7 @@ const FormAddUserContainer = React.memo(
             setSubmitForm(setSubmit);
             clearAddUserAdmin();
             clickDashboardUser();
+            saveUserSuccess();
           }
         }
       }
@@ -103,6 +107,7 @@ const mapDispatchToProps = {
   addUserAdmin,
   clickDashboardUser,
   clearAddUserAdmin,
+  saveUserSuccess,
 };
 FormAddUserContainer.defaultProps = {
   addUserSuccess: "",
@@ -111,6 +116,7 @@ FormAddUserContainer.defaultProps = {
   clickDashboardUser: "",
   clearDashboardUser: "",
   clearAddUserAdmin: "",
+  saveUserSuccess: "",
 };
 
 export default connect(

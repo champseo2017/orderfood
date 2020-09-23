@@ -1,13 +1,19 @@
-import { createStore,applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import rootReducer from '../redux/reducers';
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import rootReducer from "../redux/reducers";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  blacklist: ['authReducers','dashboardGetUsersReducers','addusersReducers','addUserAdminReducers']
+  blacklist: [
+    "authReducers",
+    "dashboardGetUsersReducers",
+    "addusersReducers",
+    "addUserAdminReducers",
+    "alertactivityReducers",
+  ],
   // whitelist: ['language']
 };
 

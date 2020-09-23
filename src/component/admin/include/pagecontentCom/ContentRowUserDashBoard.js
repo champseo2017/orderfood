@@ -9,13 +9,23 @@ import { MDBDataTable, MDBBtn } from "mdbreact";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 // import 'animate.css/animate.min.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./customerDatatable.scss";
 import "./pages.scss";
 import "dayjs/locale/es"; // load on demand
 const dayjs = require("dayjs");
+import { saveUserTimeOut } from "../../../../redux/action/alertactivity/alertactivityActions";
 
 const ContentRowUserDashBoard = React.memo(
-  ({ csrfToken, pageDashBoard, getUserList, resultDataUser }) => {
+  ({
+    csrfToken,
+    pageDashBoard,
+    getUserList,
+    resultDataUser,
+    alertDataDone,
+    saveUserTimeOut,
+  }) => {
     const tokenCsrf = csrfToken;
     useEffect(() => {
       let mount = true;
@@ -30,6 +40,39 @@ const ContentRowUserDashBoard = React.memo(
     }, [pageDashBoard]);
 
     const { data, isLoading, isRejected } = resultDataUser;
+
+    useEffect(() => {
+      let mount = true;
+      if (mount) {
+        if (typeof window !== "undefined") {
+          if (isLoading === false) {
+            const elmPageLink = [
+              ...document.querySelectorAll(
+                "div.dataTables_paginate ul.pagination li.page-item a"
+              ),
+            ];
+            const scrollToTop = () => {
+              return window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            };
+
+            if (CheckIsEmpty(elmPageLink)) {
+              for (let i = 0; i < elmPageLink.length; i++) {
+                elmPageLink[i].addEventListener("click", function (e) {
+                  e.preventDefault();
+                  return scrollToTop();
+                });
+              }
+            }
+          }
+        }
+      }
+      return () => {
+        mount = false;
+      };
+    }, [isLoading]);
 
     const renderLoadingData = () => {
       if (isRejected) {
@@ -71,6 +114,30 @@ const ContentRowUserDashBoard = React.memo(
             cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
             cancelButtonAriaLabel: "Thumbs down",
           });
+      }
+    };
+
+    const timeOutAlert = () => {
+      return saveUserTimeOut();
+    };
+
+    const createNotification = () => {
+      const { check } = alertDataDone;
+      const options = {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => {
+          return timeOutAlert();
+        },
+      };
+
+      if (check) {
+        return toast.success("Successfully added Users", options);
       }
     };
 
@@ -181,6 +248,8 @@ const ContentRowUserDashBoard = React.memo(
       } else if (isLoading === false) {
         return (
           <React.Fragment>
+            {createNotification()}
+            <ToastContainer />
             <div id="datatables-react" className="d-flex h-100 w-100">
               <MDBDataTable
                 responsive
@@ -210,13 +279,17 @@ const ContentRowUserDashBoard = React.memo(
 const mapStateToProps = (state) => {
   return {
     resultDataUser: state.dashboardGetUsersReducers.dataUsers,
+    alertDataDone: state.alertactivityReducers.userSave,
   };
 };
 const mapDispatchToProps = {
   getUserList,
+  saveUserTimeOut,
 };
 ContentRowUserDashBoard.defaultProps = {
   pageDashBoard: "",
+  alertDataDone: "",
+  saveUserTimeOut: "",
 };
 
 export default connect(
