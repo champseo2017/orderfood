@@ -70,9 +70,13 @@ app.prepare().then(() => {
   /* Learn node js
   Examples
   Parallel : multi-tasking
+  
+  Call async.parallel() With an object
 
-  async.parallel(tasks, afterTasksCallback) will execute a set of tasks in parallel and wait the end of
-all tasks (reported by the call of callback function)
+  You can replace the tasks array paramter by an object. In this case, results will be also an 
+  object with the same keys than tasks.
+
+  It's very useful to compute some tasks and find easily each result.
 
   
   */
@@ -94,16 +98,18 @@ all tasks (reported by the call of callback function)
     }, 1000);
  }
 
-  async.parallel([
-    shortTimeFunction,
-    mediumTimeFunction,
-    longTimeFunction
-  ],(err, results)=> {
-     if(err){
-       return console.error(err)
-     }
-     console.log(results);
-  })
+ async.parallel({
+   short: shortTimeFunction,
+   medium: mediumTimeFunction,
+   long: longTimeFunction
+ }, (err, results) => {
+   if(err){
+      return console.error(err)
+   }
+   console.log(results);
+ })
+
+  
 
   
 
