@@ -71,30 +71,29 @@ app.prepare().then(() => {
   Examples
   Parallel : multi-tasking
   
-  Call async.parallel() With an object
+  Resolving multiple values
+  Each parallel function is passed a callback. This callback can either return an error as the first
+argument or success values after that. If a callback is passed several success values, these
+results are returned as an array.
 
-  You can replace the tasks array paramter by an object. In this case, results will be also an 
-  object with the same keys than tasks.
-
-  It's very useful to compute some tasks and find easily each result.
 
   
   */
  function shortTimeFunction(callback){
     setTimeout(() => {
-        callback(null, 'resultOfShortTime')
+        callback(null, 'resultOfShortTime1', 'resultOfShortTime2')
     }, 200);
  }
 
  function mediumTimeFunction(callback){
     setTimeout(() => {
-        callback(null, 'resultOfMediumTime')
+        callback(null, 'resultOfMediumTime2', 'resultOfMediumTime2')
     }, 500);
  }
 
  function longTimeFunction(callback){
     setTimeout(() => {
-        callback(null, 'resultOfLongTime')
+        callback(null, 'resultOfLongTime3', 'resultOfLongTime3')
     }, 1000);
  }
 
