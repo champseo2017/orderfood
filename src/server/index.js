@@ -69,35 +69,35 @@ app.prepare().then(() => {
 
   /* Learn node js
   Examples
-  Parallel : multi-tasking
-  
-  Resolving multiple values
-  Each parallel function is passed a callback. This callback can either return an error as the first
-argument or success values after that. If a callback is passed several success values, these
-results are returned as an array.
-
+  Series : independent mono-tasking
+  async.series(tasks, afterTasksCallback) will execute a set of tasks. Each task are executed after
+another. If a task fails, async stops immediately the execution and jump into the main
+callback.
+When tasks are finished successfully, async call the "master" callback with all errors and all results
+of tasks.
 
   
   */
  function shortTimeFunction(callback){
     setTimeout(() => {
-        callback(null, 'resultOfShortTime1', 'resultOfShortTime2')
+        callback(null, 'resultOfShortTime1')
     }, 200);
  }
 
  function mediumTimeFunction(callback){
     setTimeout(() => {
-        callback(null, 'resultOfMediumTime2', 'resultOfMediumTime2')
+        callback(null, 'resultOfMediumTime2')
     }, 500);
  }
 
  function longTimeFunction(callback){
     setTimeout(() => {
-        callback(null, 'resultOfLongTime3', 'resultOfLongTime3')
+      
+        callback(null, 'resultOfLongTime3')
     }, 1000);
  }
 
- async.parallel({
+ async.series({
    short: shortTimeFunction,
    medium: mediumTimeFunction,
    long: longTimeFunction
