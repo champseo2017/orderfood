@@ -59,7 +59,6 @@ import { CheckIsEmpty } from "../../component/library/FuncCheckEmpty";
 import { adminSignIn } from "../../redux/action/pagesAdminActions";
 import { connect } from "react-redux";
 
-
 class Index extends Component {
   _isMounted = false;
   static async getInitialProps(ctx) {
@@ -107,7 +106,7 @@ class Index extends Component {
                   <TopbarSearch />
                   <TopbarNavbar />
                 </TopBar>
-                <ContainerContent csrfToken={csrfToken}/>
+                <ContainerContent csrfToken={csrfToken} />
               </Content>
             </Wrapper>
             <ScrolltoTopButton />

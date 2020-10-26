@@ -20,6 +20,7 @@ const handle = app.getRequestHandler();
 const https = require("https");
 const httpsLocalhost = require("https-localhost")();
 const nextExpress = require("next-express/server")(app).injectInto(express);
+const async = require('async');
 
 app.prepare().then(() => {
   const server = nextExpress();
@@ -65,6 +66,50 @@ app.prepare().then(() => {
   server.listen(8000, function (err, result) {
     console.log("running in port http://localhost:" + "8000");
   });
+
+  /* Learn node js
+  Examples
+  Parallel : multi-tasking
+
+  async.parallel(tasks, afterTasksCallback) will execute a set of tasks in parallel and wait the end of
+all tasks (reported by the call of callback function)
+
+  
+  */
+ function shortTimeFunction(callback){
+    setTimeout(() => {
+        callback(null, 'resultOfShortTime')
+    }, 200);
+ }
+
+ function mediumTimeFunction(callback){
+    setTimeout(() => {
+        callback(null, 'resultOfMediumTime')
+    }, 500);
+ }
+
+ function longTimeFunction(callback){
+    setTimeout(() => {
+        callback(null, 'resultOfLongTime')
+    }, 1000);
+ }
+
+  async.parallel([
+    shortTimeFunction,
+    mediumTimeFunction,
+    longTimeFunction
+  ],(err, results)=> {
+     if(err){
+       return console.error(err)
+     }
+     console.log(results);
+  })
+
+  
+
+ 
+
+
 
   //PORT | https
   // const funcHttpsLocal = async() => {
