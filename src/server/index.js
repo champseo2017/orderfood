@@ -20,7 +20,7 @@ const handle = app.getRequestHandler();
 const https = require("https");
 const httpsLocalhost = require("https-localhost")();
 const nextExpress = require("next-express/server")(app).injectInto(express);
-const async = require('async');
+const async = require("async");
 
 app.prepare().then(() => {
   const server = nextExpress();
@@ -69,52 +69,47 @@ app.prepare().then(() => {
 
   /* Learn node js
   Examples
-  Series : independent mono-tasking
-  async.series(tasks, afterTasksCallback) will execute a set of tasks. Each task are executed after
-another. If a task fails, async stops immediately the execution and jump into the main
-callback.
+ Waterfall : dependent mono-tasking
+  async.waterfall(tasks, afterTasksCallback) will execute a set of tasks. Each task are executed
+after another, and the result of a task is passed to the next task. As async.series(), if a task
+fails, async stop the execution and call immediately the main callback.
 When tasks are finished successfully, async call the "master" callback with all errors and all results
 of tasks.
 
   
   */
- function shortTimeFunction(callback){
+  function getUserRequest(callback) {
     setTimeout(() => {
-        callback(null, 'resultOfShortTime1')
-    }, 200);
- }
-
- function mediumTimeFunction(callback){
-    setTimeout(() => {
-        callback(null, 'resultOfMediumTime2')
+      const userResult = {
+        name: "Aamu",
+      };
+      callback(null, userResult);
     }, 500);
- }
+  }
 
- function longTimeFunction(callback){
+  function getUserFriendsRequest(user, callback) {
     setTimeout(() => {
-      
-        callback(null, 'resultOfLongTime3')
-    }, 1000);
- }
+      let friendResult = [];
+      if (user.name === "Aamu") {
+        friendResult = [
+          {
+            name: "Alice",
+          },
+          {
+            name: "Bod",
+          },
+        ];
+      }
+      callback(null, friendResult);
+    }, 500);
+  }
 
- async.series({
-   short: shortTimeFunction,
-   medium: mediumTimeFunction,
-   long: longTimeFunction
- }, (err, results) => {
-   if(err){
-      return console.error(err)
-   }
-   console.log(results);
- })
-
-  
-
-  
-
- 
-
-
+  async.waterfall([getUserRequest, getUserFriendsRequest], (err, results) => {
+    if (err) {
+      return console.error(err);
+    }
+    console.log(JSON.stringify(results));
+  });
 
   //PORT | https
   // const funcHttpsLocal = async() => {
