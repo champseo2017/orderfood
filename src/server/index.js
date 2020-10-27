@@ -69,47 +69,29 @@ app.prepare().then(() => {
 
   /* Learn node js
   Examples
- Waterfall : dependent mono-tasking
-  async.waterfall(tasks, afterTasksCallback) will execute a set of tasks. Each task are executed
-after another, and the result of a task is passed to the next task. As async.series(), if a task
-fails, async stop the execution and call immediately the main callback.
-When tasks are finished successfully, async call the "master" callback with all errors and all results
-of tasks.
-
+ async.times(To handle for loop in better way)
+To execute a function within a loop in node.js, it's fine to use a for loop for short loops. But the
+loop is long, using for loop will increase the time of processing which might cause the node
+process to hang. In such scenarios, you can use: asycn.times
   
   */
-  function getUserRequest(callback) {
-    setTimeout(() => {
-      const userResult = {
-        name: "Aamu",
-      };
-      callback(null, userResult);
-    }, 500);
-  }
 
-  function getUserFriendsRequest(user, callback) {
-    setTimeout(() => {
-      let friendResult = [];
-      if (user.name === "Aamu") {
-        friendResult = [
-          {
-            name: "Alice",
-          },
-          {
-            name: "Bod",
-          },
-        ];
-      }
-      callback(null, friendResult);
-    }, 500);
-  }
-
-  async.waterfall([getUserRequest, getUserFriendsRequest], (err, results) => {
-    if (err) {
-      return console.error(err);
-    }
-    console.log(JSON.stringify(results));
+ // Pretend this is some complicated async factory
+var createUser = function(id, callback) {
+  callback(null, {
+      id: 'user' + id
   });
+};
+
+// generate 5 users
+async.times(5, function(n, next) {
+  createUser(n, function(err, user) {
+      next(err, user);
+  });
+}, function(err, users) {
+  console.log(users)
+});
+
 
   //PORT | https
   // const funcHttpsLocal = async() => {
