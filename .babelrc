@@ -1,4 +1,14 @@
 {
-    "presets": ["next/babel"],
+    "presets": [
+      [
+        "next/babel",
+        {
+          "preset-env": {},
+          "transform-runtime": { "useESModules": false},
+          "styled-jsx": {},
+          "class-properties": {}
+        }
+      ]
+    ],
     "plugins": []
   }
