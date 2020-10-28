@@ -35,10 +35,7 @@ const nextConfig = {
         }
       }
     })
-    config.resolve.extensions = ['.js', '.jsx'];
-    config.module.rules.push(
-      {test: /\.(js|jsx)$/, use: 'babel-loader'}
-    );
+    config.resolve.extensions.push('.jsx');
     return config;
   },
   env: {
