@@ -35,7 +35,7 @@ const nextConfig = {
         }
       }
     })
-
+    config.resolve.extensions = ['', '.js', '.jsx'];
     return config;
   },
   env: {
