@@ -4,7 +4,7 @@
         "next/babel",
         {
           "preset-env": {},
-          "transform-runtime": { "useESModules": false},
+          "transform-runtime": {  "modules": "commonjs"},
           "styled-jsx": {},
           "class-properties": {}
         }
