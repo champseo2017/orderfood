@@ -69,29 +69,34 @@ app.prepare().then(() => {
 
   /* Learn node js
   Examples
- async.times(To handle for loop in better way)
-To execute a function within a loop in node.js, it's fine to use a for loop for short loops. But the
-loop is long, using for loop will increase the time of processing which might cause the node
-process to hang. In such scenarios, you can use: asycn.times
+ async.each(To handle array of data efficiently)
+When we want to handle array of data, its better to use async.each. When we want to perform
+something with all data & want to get the final callback once everything is done, then this method
+will be useful. This is handled in parallel way.
+
   
   */
 
- // Pretend this is some complicated async factory
-var createUser = function(id, callback) {
-  callback(null, {
-      id: 'user' + id
-  });
-};
+  function recursiveAction(n, callback) {
+    //do whatever want to do repeatedly
+    callback(null, n);
+  }
+  const arrayOfData = ["Ritu", "Sid", "Tom"];
 
-// generate 5 users
-async.times(5, function(n, next) {
-  createUser(n, function(err, user) {
-      next(err, user);
-  });
-}, function(err, users) {
-  console.log(users)
-});
-
+  async.each(
+    arrayOfData,
+    function (n, next) {
+      recursiveAction(n, function (err, result) {
+        console.log(result)
+        next(err);
+      });
+    },
+    function (err) {
+      if (err === "error") {
+        console.log("error");
+      }
+    }
+  );
 
   //PORT | https
   // const funcHttpsLocal = async() => {
