@@ -1,11 +1,11 @@
 import App from "next/app";
 import Head from "next/head";
 import { Provider } from "react-redux";
-import configureStore from "./store";
+import configureStore from "../store";
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { CheckIsEmpty } from "./component/library/FuncCheckEmpty";
+import { CheckIsEmpty } from "../component/library/FuncCheckEmpty";
 
 const dayjs = require("dayjs");
 const utc = require("dayjs/plugin/utc"); // dependent on utc plugin

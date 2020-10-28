@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import { CheckIsEmpty } from "./component/library/FuncCheckEmpty";
+import { CheckIsEmpty } from "../component/library/FuncCheckEmpty";
 import { isMobile } from 'mobile-device-detect';
 
 class MyDocument extends Document {
