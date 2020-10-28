@@ -63,7 +63,7 @@ app.prepare().then(() => {
   // });
 
   // test noti port
-  server.listen(8000, function (err, result) {
+  server.listen(port, function (err, result) {
     console.log("running in port http://localhost:" + "8000");
   });
 
@@ -76,27 +76,6 @@ will be useful. This is handled in parallel way.
 
   
   */
-
-  function recursiveAction(n, callback) {
-    //do whatever want to do repeatedly
-    callback(null, n);
-  }
-  const arrayOfData = ["Ritu", "Sid", "Tom"];
-
-  async.each(
-    arrayOfData,
-    function (n, next) {
-      recursiveAction(n, function (err, result) {
-        console.log(result)
-        next(err);
-      });
-    },
-    function (err) {
-      if (err === "error") {
-        console.log("error");
-      }
-    }
-  );
 
   //PORT | https
   // const funcHttpsLocal = async() => {
