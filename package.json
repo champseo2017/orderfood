@@ -14,6 +14,7 @@
     "@zeit/next-sass": "^1.0.1",
     "animate.css": "^4.1.0",
     "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
     "body-parser": "^1.19.0",
     "check-is-empty-js": "^1.0.3",
     "cloudinary": "^1.22.0",
